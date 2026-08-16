@@ -76,7 +76,9 @@
   function renderGridlines(rowsEl) {
     ['left', 'right'].forEach(function (side) {
       var zone = el('gl-zone gl-' + side);
-      TICKS.forEach(function (t) {
+      // skip the innermost tick: it sits exactly on the center-column edge,
+      // where the bars originate — a gridline there is redundant
+      TICKS.slice(1).forEach(function (t) {
         var line = el('gl-line');
         if (side === 'left') {
           line.style.right = pct(t) + '%';
