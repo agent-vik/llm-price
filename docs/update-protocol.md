@@ -54,3 +54,53 @@
 
 - commit message：`data: refresh prices (YYYY-MM-DD)`
 - 若本次还同步了 official_id/pricing_url：`data: refresh prices + sync model ids (YYYY-MM-DD)`
+
+---
+
+## 附录：采集经验（首轮 2026-08-16 积累，每次采集前读一遍）
+
+*目的：让下一次采集更快、更准。只记能少走弯路的信息。*
+
+### A. 官方来源索引（直接访问，不再反复搜索）
+
+| 厂商 | 定价页 URL | 抓取方式 |
+|------|-----------|---------|
+| Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | Browser Run（open-link 只抓到导航） |
+| OpenAI | https://platform.openai.com/docs/pricing | **必须 Browser Run**（JS 渲染，/api/pricing 是订阅计划页不是 API 价） |
+| Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | open-link 直接可用 |
+| xAI | https://docs.x.ai/developers/models/grok-4.6 | 搜索摘要即有价，open-link 验证 |
+| MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | open-link 直接可用 |
+| DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | open-link 直接可用 |
+| 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | open-link 直接可用（火山方舟模型价格） |
+| 阿里 Qwen | https://help.aliyun.com/zh/model-studio/model-pricing | open-link 直接可用（国际站 alibabacloud.com 返空，用国内站） |
+| 智谱 GLM | https://bigmodel.cn/pricing | **必须 Browser Run** |
+| Moonshot Kimi | https://platform.moonshot.cn/docs/pricing/chat-k3 | 见 B-2（.md 后缀技巧） |
+| 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | **必须 Browser Run**；注意旧文档 product/1729/97731 已过期 |
+
+### B. 抓取技巧（按优先级试）
+
+1. **open-link 先试**：能拿到正文就直接用，成本最低
+2. **Mintlify 文档的 `.md` 后缀**：`<页面 URL>.md` 直接返回 markdown 原文，连定价表都在（含 JSX 组件里的数据行）——Kimi 平台文档靠这个解决
+3. **Browser Run**（Cloudflare，`/browser-run/markdown` 端点）：JS 渲染页面的标准解；注意 Quick Actions 有 10 秒间隔限制，批量抓取时串行、逐个等
+4. **`/browser-run/json` 和 `/screenshot` 不可靠**：本轮都失败或返回空，别浪费时间，直接 markdown 端点 + 自己解析
+5. **搜索摘要可作线索但不可作来源**：搜索结果里的 snippet 价格只能用来定位页面，写进真相源的必须是自己打开官方页看到的数字
+
+### C. 定价页常见的坑（看到这些结构别慌）
+
+- **划线价 vs 生效价**：MiniMax 显示 ~~$0.60~~ $0.30（永久 5 折）——取**生效价**（未划线的）
+- **促销期价格**：Gemini 3.7 Flash 促销到 2026-12-31，之后翻倍——取当前生效价，在 selection_note 注明促销截止日
+- **峰谷定价生效日**：DeepSeek 在页面里写明切换日期（本轮正好撞上生效日）——注意区分「页面列的是新价还是旧价」
+- **上下文阶梯**：OpenAI（Short/Long context）、Qwen（不同模型不同档）、Seed（输入长度分档）——按规则 1 取最短档
+- **缓存价的位置各家不同**：OpenAI 同表 Cached input 列；Anthropic 的「Cache Hits & Refreshes」列（注意别取成 Cache Writes）；Google/智谱/腾讯 单列「缓存命中」；Kimi「输入价格（缓存命中）」；Qwen **不在定价表里**，要去 context-cache 文档查（= 输入价 × 10%）
+- **官方 ID 不一定在定价页**：Anthropic 只有展示名（Claude Fable 5），没有 API model ID——official_id 留空，不猜
+- **同名不同价**：Seed 2.1 有 pro/turbo 两档，列表里的「Seed 2.1」对应 pro（旗舰）；拿不准时向 Victor 确认，不自行假设
+
+### D. 汇率
+
+- 中国银行外汇牌价（bankofchina.com/sourcedb/whpj）中间价是可靠来源，页面直接给出当日数值
+- 一次采集只用一个汇率（采集开始时的），全部 CNY 模型共用，写入各自的 fx_rate
+
+### E. 执行节奏
+
+- 16 个模型一轮约 40–60 分钟；建议按厂商分批（美系 USD 一批，中系 CNY 一批），每批落盘 + commit，避免中途失败丢进度
+- Claude 系、Gemini 系同厂商多模型共享一个定价页，打开一次全部抄完
