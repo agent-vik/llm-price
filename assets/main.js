@@ -87,7 +87,6 @@
       });
       rowsEl.appendChild(zone);
     });
-    rowsEl.appendChild(el('gl-center-line'));
   }
 
   // ---------- diverging bars ----------
@@ -118,7 +117,8 @@
         barL.appendChild(seg);
       }
       var valL = el('val');
-      valL.textContent = '$' + fmt(p.input);
+      valL.textContent = '$' + fmt(p.input) +
+        (p.cached_input != null ? ' ($' + fmt(p.cached_input) + ')' : '');
       barL.appendChild(valL);
       sideL.appendChild(barL);
       row.appendChild(sideL);

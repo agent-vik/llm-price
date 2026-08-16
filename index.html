@@ -30,13 +30,17 @@
       <span class="legend-item"><i class="swatch sw-input"></i>Input</span>
       <span class="legend-item"><i class="swatch sw-cached"></i>Cached input</span>
       <span class="legend-item"><i class="swatch sw-output"></i>Output</span>
-      <span class="legend-note">log scale · bars diverge from center · order is curated, not ranked</span>
+      <span class="legend-note">order is curated, not ranked</span>
+    </div>
+
+    <div class="log-callout" role="note">
+      <strong>Log scale</strong> — bar length is logarithmic: each grid step is ×10. Two bars that look “a bit” apart can differ by an order of magnitude. Don’t read it linearly.
     </div>
 
     <div class="chart" id="chart" role="img" aria-label="Diverging bar chart: input prices extend left, output prices extend right, both on logarithmic scales">
       <div class="axis-row">
         <div class="axis-side" id="axis-left"></div>
-        <div class="axis-center">$/1M</div>
+        <div class="axis-gap"></div>
         <div class="axis-side" id="axis-right"></div>
       </div>
       <div id="rows"></div>
@@ -45,7 +49,7 @@
 
   <section class="panel">
     <h2 class="panel-title">Input vs Output</h2>
-    <p class="panel-sub">Each dot is a model (log–log). Dashed line: output = input. Dots above the line charge more for output than input.</p>
+    <p class="panel-sub">Each dot is a model (log–log scale — every grid step is ×10). Dashed line: output = input. Dots above the line charge more for output than input.</p>
     <div class="scatter-wrap">
       <svg id="scatter" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of input versus output price per model"></svg>
     </div>
