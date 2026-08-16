@@ -3,10 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM Price</title>
+<title>LLM Price — Official API Pricing of 16 Frontier Models</title>
+<meta name="description" content="Official API prices of 16 frontier LLMs in USD per 1M tokens — input, cached input, and output. Collected from official pricing pages.">
+<meta property="og:title" content="LLM Price — Official API Pricing of 16 Frontier Models">
+<meta property="og:description" content="Input / cached input / output prices in USD per 1M tokens, collected from official sources.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://llm-price.victor42.work/">
+<link rel="canonical" href="https://llm-price.victor42.work/">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>LLM Price</h1>
-<p>Coming soon.</p>
+
+<header class="site-header">
+  <h1>LLM Price</h1>
+  <p class="subtitle">Official API pricing of frontier models — USD per 1M tokens</p>
+  <p class="meta">
+    <span id="model-count" class="badge"></span>
+    <span id="collected-date" class="badge"></span>
+    <span class="badge">3 dimensions: input · cached input · output</span>
+  </p>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="legend" aria-hidden="true">
+      <span class="legend-item"><i class="swatch sw-input"></i>Input</span>
+      <span class="legend-item"><i class="swatch sw-cached"></i>Cached input</span>
+      <span class="legend-item"><i class="swatch sw-output"></i>Output</span>
+      <span class="legend-note">log scale · order is curated, not ranked by price</span>
+    </div>
+
+    <div class="chart" id="chart" role="img" aria-label="Grouped horizontal bar chart of model prices on a logarithmic scale">
+      <div class="axis-row" id="axis"></div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title">Full data</h2>
+    <div class="table-wrap">
+      <table id="data-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th class="num">Input</th>
+            <th class="num">Cached input</th>
+            <th class="num">Output</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel notes-panel">
+    <h2 class="panel-title">Methodology</h2>
+    <ul class="notes">
+      <li>Prices are <strong>official list prices</strong> collected from each provider's pricing page — short-context tier where tiered, off-peak where peak/off-peak pricing exists, promotional discounts ignored.</li>
+      <li>CNY-priced models are converted to USD at the Bank of China mid-rate on the collection date (rate recorded per model).</li>
+      <li>«—» means the provider publishes no cached-input price for that model.</li>
+      <li>This page has no auto-update mechanism; refreshes follow a manual <a href="https://github.com/agent-vik/llm-price/blob/main/docs/update-protocol.md" target="_blank" rel="noopener">collection protocol</a>.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>
+    <a href="https://github.com/agent-vik/llm-price" target="_blank" rel="noopener">GitHub</a> ·
+    MIT License ·
+    Created by <a href="https://victor42.work/" target="_blank" rel="noopener">Victor42</a> &amp;
+    <a href="https://github.com/agent-vik" target="_blank" rel="noopener">Agent Vik</a>
+  </p>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
