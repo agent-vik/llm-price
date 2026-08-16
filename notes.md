@@ -31,7 +31,7 @@
 可视化的唯一数据源。每个模型条目字段：
 `input` / `cached_input` / `output`（USD/1M）+ `official_id` / `source_url` / `collected_at` / `fx_rate` / `selection_note`
 
-### 3.2 模型配置：`config/models.json`
+### 3.2 模型配置：`data/models.json`
 Victor 管理的模型列表（display / official_id / provider / pricing_url）。Agent 只可同步 `official_id` 与 `pricing_url` 两个字段，不可改名称与顺序。
 
 ### 3.3 更新协议：`docs/update-protocol.md`
@@ -41,12 +41,16 @@ Victor 管理的模型列表（display / official_id / provider / pricing_url）
 
 ```
 llm-price/
-├── config/models.json        # 模型列表（Victor 管理）
-├── data/prices.json          # 真相源（价格表）
-├── docs/update-protocol.md   # 价格收集与更新协议
-├── index.html + assets/      # 数据可视化前端（待建）
-├── notes.md                  # 本文档
-└── README.md                 # 仓库说明
+├── data/
+│   ├── models.json         # 模型列表（Victor 管理）
+│   └── prices.json         # 真相源（价格表）
+├── docs/update-protocol.md # 价格收集与更新协议
+├── assets/
+│   ├── style.css
+│   └── main.js
+├── index.html              # 数据可视化前端
+├── notes.md                # 本文档
+└── README.md               # 仓库说明
 ```
 
 ## 5. 当前状态（2026-08-16）

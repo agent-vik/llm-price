@@ -116,7 +116,7 @@
   }
 
   Promise.all([
-    fetch('config/models.json').then(function (r) { return r.json(); }),
+    fetch('data/models.json').then(function (r) { return r.json(); }),
     fetch('data/prices.json').then(function (r) { return r.json(); })
   ]).then(function (res) {
     init(res[0].models, res[1].prices);

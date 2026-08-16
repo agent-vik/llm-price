@@ -6,7 +6,7 @@ Curated official API pricing for a hand-picked set of LLMs — collected from of
 
 ## Tech
 
-Static data visualization (HTML/CSS/JS). Single source of truth: `data/prices.json`. Model list curated by Victor: `config/models.json`. Price refresh follows a manual protocol (`docs/update-protocol.md`) — no auto-update mechanism by design.
+Static data visualization (HTML/CSS/JS). Single source of truth: `data/prices.json`. Model list curated by Victor: `data/models.json`. Price refresh follows a manual protocol (`docs/update-protocol.md`) — no auto-update mechanism by design.
 
 ---
 
