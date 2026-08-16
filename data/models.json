@@ -81,6 +81,12 @@
       "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
+      "display": "Deepseek V4 Flash",
+      "official_id": "deepseek-v4-flash",
+      "provider": "DeepSeek",
+      "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
+    },
+    {
       "display": "GLM 5.2",
       "official_id": "glm-5.2",
       "provider": "Zhipu",

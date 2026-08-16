@@ -171,6 +171,16 @@
       "collected_at": "2026-08-16",
       "fx_rate": 6.7605,
       "selection_note": "CNY 1/0.25/4 at fx 6.7605; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
+    },
+    "Deepseek V4 Flash": {
+      "input": 0.22,
+      "cached_input": 0.007,
+      "output": 0.66,
+      "official_id": "deepseek-v4-flash",
+      "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "collected_at": "2026-08-17",
+      "fx_rate": null,
+      "selection_note": "off-peak pricing; input = cache miss rate"
     }
   }
 }

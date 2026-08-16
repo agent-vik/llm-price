@@ -40,10 +40,12 @@ Victor 管理的模型列表（display / official_id / provider / pricing_url）
 
 ## 4. 可视化前端
 
-纯静态 HTML/CSS/JS，数据从真相源 JSON 动态渲染，无构建步骤。页面结构自上而下：
+纯静态 HTML/CSS/JS，数据从真相源 JSON 动态渲染，无构建步骤。**所有图表内容 100% 数据驱动**：模型名、厂商、价格、坐标域刻度全部来自 JSON；改数据文件即改页面，无任何写死的价格或模型名（页面标题中的模型数量也由 JS 从数据读取并回填 `<title>`；HTML 中的 meta 数字在每次发布时与数据同步）。
 
-1. **双向（蝴蝶）条形图**：模型名居中列，输入价条形向左、输出价条形向右，两侧各自对数刻度（$0.01–$100）；缓存价不是独立条，作为实心段嵌在输入条内（同色、输入部分降低透明度）；条形旁数值标注，缓存价以括号跟在输入价后；按厂商分组显示；顶部有对数刻度警示条（防止观众按线性读图）
-2. **Input vs Output 散点图**：双对数坐标，坐标域数据驱动自适应；每点一个模型、按厂商着色；虚线参考线 output=input；标签自动避让
+页面结构自上而下：
+
+1. **双向（蝴蝶）条形图**：模型名居中列，输入价条形向左、输出价条形向右，两侧各自对数刻度（坐标域按数据自动取整到十的幂）；缓存价不是独立条，作为实心段嵌在输入条内（同色、输入部分降低透明度）；条形旁数值标注，缓存价以括号跟在输入价后；按厂商分组显示；顶部有对数刻度警示条（防止观众按线性读图）
+2. **Price Space 散点图**：双对数坐标，坐标域数据驱动自适应；每点一个模型、按厂商着色；拖尾线编码缓存折扣（尾巴从缓存价延伸到输入价，越长折扣越深，颜色语言与蝴蝶图一致）；虚线参考线 output=input；标签自动避让
 3. **完整数据表**：三维价格 + 官方来源链接
 4. **Methodology**：读图说明、正价规则、汇率换算口径、更新机制
 
@@ -60,16 +62,20 @@ llm-price/
 ├── assets/
 │   ├── style.css           # 全站样式
 │   └── main.js             # 渲染逻辑（条形图 + 散点图 + 数据表）
-├── index.html              # 页面骨架
+├── index.html              # 页面骨架 + SEO 元数据（meta / OG / JSON-LD）
+├── sitemap.xml             # SEO
+├── robots.txt              # SEO
 ├── CNAME                   # GitHub Pages 自定义域名
 ├── LICENSE                 # MIT
 ├── notes.md                # 本文档
 └── README.md               # 仓库说明
 ```
 
-## 6. 模型清单（16 个，顺序固定）
+SEO 措施：完整 meta（description / keywords / author / robots）、Open Graph、Twitter Card、JSON-LD Dataset 结构化数据（含两份 JSON 数据的 DataDownload）、sitemap.xml + robots.txt、canonical URL。
 
-Gemini 3.1 Pro / Gemini 3.7 Flash / GPT 5.6 Sol / GPT 5.6 Terra / GPT 5.6 Luna / Claude 5 Fable / Claude 5 Opus / Claude 5 Sonnet / Grok 4.6 / Seed 2.1 / Qwen 3.8 Max / HY 3.0 / Deepseek V4 Pro / GLM 5.2 / Kimi K3 / Minimax M3
+## 6. 模型清单（17 个，顺序固定）
+
+Gemini 3.1 Pro / Gemini 3.7 Flash / GPT 5.6 Sol / GPT 5.6 Terra / GPT 5.6 Luna / Claude 5 Fable / Claude 5 Opus / Claude 5 Sonnet / Grok 4.6 / Seed 2.1 / Qwen 3.8 Max / HY 3.0 / Deepseek V4 Pro / Deepseek V4 Flash / GLM 5.2 / Kimi K3 / Minimax M3
 
 ---
 

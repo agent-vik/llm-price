@@ -3,14 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM Price — Official API Pricing of 16 Frontier Models</title>
-<meta name="description" content="Official API prices of 16 frontier LLMs in USD per 1M tokens — input, cached input, and output. Collected from official pricing pages.">
-<meta property="og:title" content="LLM Price — Official API Pricing of 16 Frontier Models">
-<meta property="og:description" content="Input / cached input / output prices in USD per 1M tokens, collected from official sources.">
+<title>LLM Price — Official API Pricing of 17 Frontier Models</title>
+<meta name="description" content="Official API prices of 17 frontier LLMs in USD per 1M tokens — input, cached input, and output. Collected from official pricing pages.">
+<meta name="keywords" content="LLM, LLM pricing, API pricing, token pricing, input output price, cached input, frontier models, price comparison, USD per million tokens">
+<meta name="author" content="Agent Vik &amp; Victor42">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://llm-price.victor42.work/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://llm-price.victor42.work/">
-<link rel="canonical" href="https://llm-price.victor42.work/">
-<link rel="stylesheet" href="assets/style.css">
+<meta property="og:title" content="LLM Price — Official API Pricing of 17 Frontier Models">
+<meta property="og:description" content="Input / cached input / output prices of 17 frontier models in USD per 1M tokens, collected from official sources.">
+<meta property="og:site_name" content="LLM Price">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="https://llm-price.victor42.work/">
+<meta name="twitter:title" content="LLM Price — Official API Pricing of 17 Frontier Models">
+<meta name="twitter:description" content="Official API prices of 17 frontier models in USD per 1M tokens.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='8' y='42' width='34' height='16' rx='3' fill='%234c9aff' opacity='0.4'/><rect x='34' y='42' width='8' height='16' rx='2' fill='%234c9aff'/><rect x='50' y='42' width='42' height='16' rx='3' fill='%2338c793'/><line x1='42' y1='20' x2='42' y2='80' stroke='%236b7484' stroke-width='3'/></svg>">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="stylesheet" href="assets/style.css?v=2">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "LLM Price — frontier model API pricing",
+  "description": "Official API prices of 17 frontier large language models, in USD per 1M tokens (input, cached input, output), collected from each provider's official pricing page.",
+  "url": "https://llm-price.victor42.work/",
+  "license": "https://github.com/agent-vik/llm-price/blob/main/LICENSE",
+  "creator": [
+    { "@type": "Person", "name": "Victor42", "url": "https://victor42.work" },
+    { "@type": "Organization", "name": "Agent Vik", "url": "https://github.com/agent-vik" }
+  ],
+  "distribution": [
+    { "@type": "DataDownload", "contentUrl": "https://llm-price.victor42.work/data/prices.json", "encodingFormat": "application/json" },
+    { "@type": "DataDownload", "contentUrl": "https://llm-price.victor42.work/data/models.json", "encodingFormat": "application/json" }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -48,7 +77,7 @@
   </section>
 
   <section class="panel">
-    <h2 class="panel-title">Input vs Output</h2>
+    <h2 class="panel-title">Price Space</h2>
     <p class="panel-sub">Each dot is a model (log–log scale — every grid step is ×10). Dashed line: output = input. Dots above the line charge more for output than input. A tail stretching left from a dot marks its cached-input price — the longer the tail, the deeper the cache discount; no tail means no cached price published.</p>
     <div class="scatter-wrap">
       <svg id="scatter" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of input versus output price per model"></svg>

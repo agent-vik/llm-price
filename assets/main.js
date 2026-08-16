@@ -1,11 +1,28 @@
-// LLM Price — diverging log-scale bars + vendor scatter, rendered from the source of truth.
+// LLM Price — diverging log-scale bars + price-space scatter, rendered from the source of truth.
+// All chart content comes from data/models.json + data/prices.json; nothing is hard-coded.
 (function () {
   'use strict';
 
-  // Bar chart log domain: USD per 1M tokens, $0.01 .. $100 (covers cached-input lows to Fable output high)
+  // Bar chart log domain — computed from the data (see computeDomain)
   var LOG_MIN = -2;
   var LOG_MAX = 2;
-  var TICKS = [0.01, 0.1, 1, 10, 100];
+  var TICKS = [];
+
+  function computeDomain(prices) {
+    var vals = [];
+    Object.keys(prices).forEach(function (k) {
+      var p = prices[k];
+      ['input', 'cached_input', 'output'].forEach(function (key) {
+        if (p[key] != null) vals.push(p[key]);
+      });
+    });
+    var lo = Math.log10(Math.min.apply(null, vals));
+    var hi = Math.log10(Math.max.apply(null, vals));
+    LOG_MIN = Math.floor(lo);
+    LOG_MAX = Math.max(LOG_MIN + 1, Math.ceil(hi));
+    TICKS = [];
+    for (var e = LOG_MIN; e <= LOG_MAX; e++) TICKS.push(Math.pow(10, e));
+  }
 
   var VENDOR_COLORS = {
     'Google': '#6ea8fe',
@@ -76,9 +93,7 @@
   function renderGridlines(rowsEl) {
     ['left', 'right'].forEach(function (side) {
       var zone = el('gl-zone gl-' + side);
-      // skip the innermost tick: it sits exactly on the center-column edge,
-      // where the bars originate — a gridline there is redundant
-      TICKS.slice(1).forEach(function (t) {
+      TICKS.forEach(function (t) {
         var line = el('gl-line');
         if (side === 'left') {
           line.style.right = pct(t) + '%';
@@ -251,9 +266,26 @@
       var x = sx(p.input), y = sy(p.output);
       var color = VENDOR_COLORS[m.provider] || '#c0c8d8';
 
+      // tail: cached price (solid tick) .. input price (faded span) —
+      // length shows the cache discount; mirrors the butterfly chart's
+      // "input faded / cached solid" color language
+      if (p.cached_input != null) {
+        var xc = sx(p.cached_input);
+        svg.appendChild(svgEl('line', {
+          x1: xc, y1: y, x2: x, y2: y,
+          stroke: color, 'stroke-opacity': 0.35, 'stroke-width': 3
+        }));
+        svg.appendChild(svgEl('line', {
+          x1: xc, y1: y - 5, x2: xc, y2: y + 5,
+          stroke: color, 'stroke-width': 2
+        }));
+      }
+
       var dot = svgEl('circle', { class: 'sc-dot', cx: x, cy: y, r: 5.5, fill: color });
       dot.appendChild(svgEl('title')).textContent =
-        m.display + ' \u2014 input $' + fmt(p.input) + ', output $' + fmt(p.output);
+        m.display + ' \u2014 input $' + fmt(p.input) +
+        (p.cached_input != null ? ', cached $' + fmt(p.cached_input) : '') +
+        ', output $' + fmt(p.output);
       svg.appendChild(dot);
 
       // pick the first candidate position that doesn't collide with placed labels
@@ -328,6 +360,8 @@
   }
 
   function init(models, prices) {
+    computeDomain(prices);
+    document.title = 'LLM Price — Official API Pricing of ' + models.length + ' Frontier Models';
     renderAxis();
     var rowsEl = document.getElementById('rows');
     renderGridlines(rowsEl);
