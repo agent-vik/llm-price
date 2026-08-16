@@ -2,21 +2,101 @@
   "description": "模型列表由 Victor 指定与维护。Agent 只更新价格数据（data/prices.json），不增删本文件中的模型。",
   "currency": "USD per 1M tokens",
   "models": [
-    { "display": "Gemini 3.1 Pro",   "official_id": null, "provider": "Google",     "pricing_url": null },
-    { "display": "Gemini 3.7 Flash", "official_id": null, "provider": "Google",     "pricing_url": null },
-    { "display": "GPT 5.6 Sol",      "official_id": null, "provider": "OpenAI",     "pricing_url": null },
-    { "display": "GPT 5.6 Terra",    "official_id": null, "provider": "OpenAI",     "pricing_url": null },
-    { "display": "GPT 5.6 Luna",     "official_id": null, "provider": "OpenAI",     "pricing_url": null },
-    { "display": "Claude 5 Fable",   "official_id": null, "provider": "Anthropic",  "pricing_url": null },
-    { "display": "Claude 5 Opus",    "official_id": null, "provider": "Anthropic",  "pricing_url": null },
-    { "display": "Claude 5 Sonnet",  "official_id": null, "provider": "Anthropic",  "pricing_url": null },
-    { "display": "Grok 4.6",         "official_id": null, "provider": "xAI",        "pricing_url": null },
-    { "display": "Seed 2.1",         "official_id": null, "provider": "Volcengine", "pricing_url": null },
-    { "display": "Qwen 3.8 Max",     "official_id": null, "provider": "Alibaba",    "pricing_url": null },
-    { "display": "HY 3.0",           "official_id": null, "provider": null,         "pricing_url": null },
-    { "display": "Deepseek V4 Pro",  "official_id": null, "provider": "DeepSeek",   "pricing_url": null },
-    { "display": "GLM 5.2",          "official_id": null, "provider": "Zhipu",      "pricing_url": null },
-    { "display": "Kimi K3",          "official_id": null, "provider": "Moonshot",   "pricing_url": null },
-    { "display": "Minimax M3",       "official_id": null, "provider": "MiniMax",    "pricing_url": null }
+    {
+      "display": "Gemini 3.1 Pro",
+      "official_id": "gemini-3.1-pro-preview",
+      "provider": "Google",
+      "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "display": "Gemini 3.7 Flash",
+      "official_id": "gemini-3.7-flash",
+      "provider": "Google",
+      "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing"
+    },
+    {
+      "display": "GPT 5.6 Sol",
+      "official_id": "gpt-5.6-sol",
+      "provider": "OpenAI",
+      "pricing_url": "https://platform.openai.com/docs/pricing"
+    },
+    {
+      "display": "GPT 5.6 Terra",
+      "official_id": "gpt-5.6-terra",
+      "provider": "OpenAI",
+      "pricing_url": "https://platform.openai.com/docs/pricing"
+    },
+    {
+      "display": "GPT 5.6 Luna",
+      "official_id": "gpt-5.6-luna",
+      "provider": "OpenAI",
+      "pricing_url": "https://platform.openai.com/docs/pricing"
+    },
+    {
+      "display": "Claude 5 Fable",
+      "official_id": null,
+      "provider": "Anthropic",
+      "pricing_url": "https://docs.anthropic.com/en/docs/about-claude/pricing"
+    },
+    {
+      "display": "Claude 5 Opus",
+      "official_id": null,
+      "provider": "Anthropic",
+      "pricing_url": "https://docs.anthropic.com/en/docs/about-claude/pricing"
+    },
+    {
+      "display": "Claude 5 Sonnet",
+      "official_id": null,
+      "provider": "Anthropic",
+      "pricing_url": "https://docs.anthropic.com/en/docs/about-claude/pricing"
+    },
+    {
+      "display": "Grok 4.6",
+      "official_id": "grok-4.6",
+      "provider": "xAI",
+      "pricing_url": "https://docs.x.ai/developers/models/grok-4.6"
+    },
+    {
+      "display": "Seed 2.1",
+      "official_id": "doubao-seed-2.1-pro",
+      "provider": "Volcengine",
+      "pricing_url": "https://www.volcengine.com/docs/82379/1544106"
+    },
+    {
+      "display": "Qwen 3.8 Max",
+      "official_id": "qwen3.8-max",
+      "provider": "Alibaba",
+      "pricing_url": "https://help.aliyun.com/zh/model-studio/model-pricing"
+    },
+    {
+      "display": "HY 3.0",
+      "official_id": "hy3",
+      "provider": "Tencent",
+      "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
+    },
+    {
+      "display": "Deepseek V4 Pro",
+      "official_id": "deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
+    },
+    {
+      "display": "GLM 5.2",
+      "official_id": "glm-5.2",
+      "provider": "Zhipu",
+      "pricing_url": "https://bigmodel.cn/pricing"
+    },
+    {
+      "display": "Kimi K3",
+      "official_id": "kimi-k3",
+      "provider": "Moonshot",
+      "pricing_url": "https://platform.moonshot.cn/docs/pricing/chat-k3"
+    },
+    {
+      "display": "Minimax M3",
+      "official_id": "MiniMax-M3",
+      "provider": "MiniMax",
+      "pricing_url": "https://platform.minimax.io/docs/guides/pricing-paygo"
+    }
   ]
 }

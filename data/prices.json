@@ -121,6 +121,56 @@
       "collected_at": "2026-08-16",
       "fx_rate": 6.7605,
       "selection_note": "<=256K tier (short context); CNY 6/1.2/30 at fx 6.7605"
+    },
+    "Kimi K3": {
+      "input": 2.96,
+      "cached_input": 0.3,
+      "output": 14.79,
+      "official_id": "kimi-k3",
+      "source_url": "https://platform.moonshot.cn/docs/pricing/chat-k3",
+      "collected_at": "2026-08-16",
+      "fx_rate": 6.7605,
+      "selection_note": "CNY 20/2/100 at fx 6.7605; single 1M context tier"
+    },
+    "Minimax M3": {
+      "input": 0.3,
+      "cached_input": 0.06,
+      "output": 1.2,
+      "official_id": "MiniMax-M3",
+      "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "collected_at": "2026-08-16",
+      "fx_rate": null,
+      "selection_note": "<=512k tier (short context); permanent 50% off applied (effective prices)"
+    },
+    "GLM 5.2": {
+      "input": 1.18,
+      "cached_input": 0.3,
+      "output": 4.14,
+      "official_id": "glm-5.2",
+      "source_url": "https://bigmodel.cn/pricing",
+      "collected_at": "2026-08-16",
+      "fx_rate": 6.7605,
+      "selection_note": "CNY 8/2/28 at fx 6.7605; single 1M context tier"
+    },
+    "Qwen 3.8 Max": {
+      "input": 1.78,
+      "cached_input": 0.18,
+      "output": 5.33,
+      "official_id": "qwen3.8-max",
+      "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+      "collected_at": "2026-08-16",
+      "fx_rate": 6.7605,
+      "selection_note": "CNY 12/36 at fx 6.7605; single 1M tier; cached = 10% of input (context-cache doc)"
+    },
+    "HY 3.0": {
+      "input": 0.15,
+      "cached_input": 0.04,
+      "output": 0.59,
+      "official_id": "hy3",
+      "source_url": "https://cloud.tencent.com/document/product/1823/130055",
+      "collected_at": "2026-08-16",
+      "fx_rate": 6.7605,
+      "selection_note": "CNY 1/0.25/4 at fx 6.7605; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
     }
   }
 }
