@@ -20,7 +20,7 @@
   <p class="meta">
     <span id="model-count" class="badge"></span>
     <span id="collected-date" class="badge"></span>
-    <span class="badge">3 dimensions: input · cached input · output</span>
+    <span class="badge">input · cached input · output</span>
   </p>
 </header>
 
@@ -28,15 +28,28 @@
   <section class="panel">
     <div class="legend" aria-hidden="true">
       <span class="legend-item"><i class="swatch sw-input"></i>Input</span>
-      <span class="legend-item"><i class="swatch sw-cached"></i>Cached input</span>
+      <span class="legend-item"><i class="swatch sw-cached"></i>Cached input (embedded in input)</span>
       <span class="legend-item"><i class="swatch sw-output"></i>Output</span>
-      <span class="legend-note">log scale · order is curated, not ranked by price</span>
+      <span class="legend-note">log scale · bars diverge from center · order is curated, not ranked</span>
     </div>
 
-    <div class="chart" id="chart" role="img" aria-label="Grouped horizontal bar chart of model prices on a logarithmic scale">
-      <div class="axis-row" id="axis"></div>
+    <div class="chart" id="chart" role="img" aria-label="Diverging bar chart: input prices extend left, output prices extend right, both on logarithmic scales">
+      <div class="axis-row">
+        <div class="axis-side" id="axis-left"></div>
+        <div class="axis-center">$/1M</div>
+        <div class="axis-side" id="axis-right"></div>
+      </div>
       <div id="rows"></div>
     </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="panel-title">Input vs Output</h2>
+    <p class="panel-sub">Each dot is a model (log–log). Dashed line: output = input. Dots above the line charge more for output than input.</p>
+    <div class="scatter-wrap">
+      <svg id="scatter" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of input versus output price per model"></svg>
+    </div>
+    <div class="vendor-legend" id="vendor-legend"></div>
   </section>
 
   <section class="panel">
@@ -60,6 +73,7 @@
   <section class="panel notes-panel">
     <h2 class="panel-title">Methodology</h2>
     <ul class="notes">
+      <li><strong>Reading the chart:</strong> bars diverge from the center line — left is input price, right is output price, both on logarithmic scales. The cached-input price is embedded inside the input bar as the solid segment.</li>
       <li>Prices are <strong>official list prices</strong> collected from each provider's pricing page — short-context tier where tiered, off-peak where peak/off-peak pricing exists, promotional discounts ignored.</li>
       <li>CNY-priced models are converted to USD at the Bank of China mid-rate on the collection date (rate recorded per model).</li>
       <li>«—» means the provider publishes no cached-input price for that model.</li>
