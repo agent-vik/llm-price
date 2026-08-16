@@ -53,10 +53,10 @@ llm-price/
 
 - [x] 仓库创建（agent-vik/llm-price）
 - [x] 基础结构：config / data / docs / README / notes
-- [x] 更新协议定稿（含 canonical 选取规则、汇率、边界）
-- [ ] **第一轮价格采集**（16 个模型）
+- [x] 更新协议定稿（含 canonical 选取规则、汇率、边界、采集经验附录）
+- [x] **第一轮价格采集**（16 个模型，官方来源，2026-08-16，汇率 BOC 6.7605）
+- [x] 部署：llm-price.victor42.work 已上线（GitHub Pages + CF 橙云，占位页验证通过 HTTP 200）
 - [ ] 可视化前端（形态已定：横向分组条形图、按指定顺序、对数刻度、附数据表）
-- [ ] 部署 llm-price.victor42.work（CNAME + Cloudflare 代理）
 
 ## 6. 模型清单（初始 16 个，顺序固定）
 
