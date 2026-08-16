@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  // Shared log domain: USD per 1M tokens, $0.01 .. $100
+  // Bar chart log domain: USD per 1M tokens, $0.01 .. $100 (covers cached-input lows to Fable output high)
   var LOG_MIN = -2;
   var LOG_MAX = 2;
   var TICKS = [0.01, 0.1, 1, 10, 100];
@@ -35,7 +35,7 @@
   }
 
   function fmtTick(v) {
-    return v < 1 ? '$' + v : '$' + v;
+    return '$' + (v < 1 ? v : v);
   }
 
   function hostOf(u) {
@@ -146,6 +146,7 @@
   // ---------- scatter ----------
   var SVG_NS = 'http://www.w3.org/2000/svg';
   var SC = { w: 760, h: 520, ml: 64, mr: 24, mt: 24, mb: 52 };
+  var SX = null, SY = null;
 
   function svgEl(tag, attrs) {
     var n = document.createElementNS(SVG_NS, tag);
@@ -153,32 +154,70 @@
     return n;
   }
 
+  // data-driven log domain: fit the axis to the points, with padding
+  function logDomain(vals) {
+    var logs = vals.map(function (v) { return Math.log10(v); });
+    var lo = Math.min.apply(null, logs), hi = Math.max.apply(null, logs);
+    var pad = Math.max(0.12, (hi - lo) * 0.10);
+    return { lo: lo - pad, hi: hi + pad };
+  }
+
+  // 1-2-5 ticks inside a log domain, thinned to <= 6
+  function niceTicks(lo, hi) {
+    var ticks = [];
+    for (var e = Math.floor(lo) - 1; e <= Math.ceil(hi) + 1; e++) {
+      [1, 2, 5].forEach(function (m) {
+        var v = m * Math.pow(10, e);
+        var lg = Math.log10(v);
+        if (lg >= lo && lg <= hi) ticks.push(v);
+      });
+    }
+    ticks.sort(function (a, b) { return a - b; });
+    while (ticks.length > 6) ticks = ticks.filter(function (_, i) { return i % 2 === 0; });
+    return ticks;
+  }
+
   function sx(v) {
-    var t = (Math.log10(v) - LOG_MIN) / (LOG_MAX - LOG_MIN);
+    var t = (Math.log10(v) - SX.lo) / (SX.hi - SX.lo);
     return SC.ml + t * (SC.w - SC.ml - SC.mr);
   }
   function sy(v) {
-    var t = (Math.log10(v) - LOG_MIN) / (LOG_MAX - LOG_MIN);
+    var t = (Math.log10(v) - SY.lo) / (SY.hi - SY.lo);
     return SC.h - SC.mb - t * (SC.h - SC.mt - SC.mb);
   }
 
   function renderScatter(models, prices) {
     var svg = document.getElementById('scatter');
 
+    // fit axes to the data
+    var inputs = [], outputs = [];
+    models.forEach(function (m) {
+      var p = prices[m.display];
+      if (!p) return;
+      inputs.push(p.input); outputs.push(p.output);
+    });
+    SX = logDomain(inputs); SY = logDomain(outputs);
+
     // grid + ticks
-    TICKS.forEach(function (t) {
-      svg.appendChild(svgEl('line', { class: 'sc-grid', x1: sx(t), y1: sy(0.01), x2: sx(t), y2: sy(100) }));
-      svg.appendChild(svgEl('line', { class: 'sc-grid', x1: sx(0.01), y1: sy(t), x2: sx(100), y2: sy(t) }));
-      var xt = svgEl('text', { class: 'sc-tick', x: sx(t), y: SC.h - SC.mb + 20, 'text-anchor': 'middle' });
-      xt.textContent = fmtTick(t);
-      svg.appendChild(xt);
-      var yt = svgEl('text', { class: 'sc-tick', x: SC.ml - 10, y: sy(t) + 4, 'text-anchor': 'end' });
-      yt.textContent = fmtTick(t);
-      svg.appendChild(yt);
+    niceTicks(SX.lo, SX.hi).forEach(function (t) {
+      svg.appendChild(svgEl('line', { class: 'sc-grid', x1: sx(t), y1: SC.mt, x2: sx(t), y2: SC.h - SC.mb }));
+      var lab = svgEl('text', { class: 'sc-tick', x: sx(t), y: SC.h - SC.mb + 20, 'text-anchor': 'middle' });
+      lab.textContent = fmtTick(t);
+      svg.appendChild(lab);
+    });
+    niceTicks(SY.lo, SY.hi).forEach(function (t) {
+      svg.appendChild(svgEl('line', { class: 'sc-grid', x1: SC.ml, y1: sy(t), x2: SC.w - SC.mr, y2: sy(t) }));
+      var lab = svgEl('text', { class: 'sc-tick', x: SC.ml - 10, y: sy(t) + 4, 'text-anchor': 'end' });
+      lab.textContent = fmtTick(t);
+      svg.appendChild(lab);
     });
 
-    // reference line: output = input
-    svg.appendChild(svgEl('line', { class: 'sc-ref', x1: sx(0.01), y1: sy(0.01), x2: sx(100), y2: sy(100) }));
+    // reference line: output = input, clipped to the overlap of both domains
+    var dLo = Math.max(SX.lo, SY.lo), dHi = Math.min(SX.hi, SY.hi);
+    if (dLo < dHi) {
+      var a = Math.pow(10, dLo), b = Math.pow(10, dHi);
+      svg.appendChild(svgEl('line', { class: 'sc-ref', x1: sx(a), y1: sy(a), x2: sx(b), y2: sy(b) }));
+    }
 
     // axes frame
     svg.appendChild(svgEl('line', { class: 'sc-axis-line', x1: SC.ml, y1: SC.h - SC.mb, x2: SC.w - SC.mr, y2: SC.h - SC.mb }));
@@ -194,8 +233,16 @@
     yl.textContent = 'Output price (USD / 1M tokens, log)';
     svg.appendChild(yl);
 
-    // dots + labels (simple collision avoidance: flip side when overlapping)
+    // dots + labels — greedy placement with candidate positions to reduce overlap
     var placed = [];
+    var CANDIDATES = [
+      { dx: 0, dy: -11 },   // above
+      { dx: 0, dy: 18 },    // below
+      { dx: 10, dy: -8, anchor: 'start' },   // upper right
+      { dx: -10, dy: -8, anchor: 'end' },    // upper left
+      { dx: 10, dy: 14, anchor: 'start' },   // lower right
+      { dx: -10, dy: 14, anchor: 'end' }     // lower left
+    ];
     models.forEach(function (m) {
       var p = prices[m.display];
       if (!p) return;
@@ -204,19 +251,30 @@
 
       var dot = svgEl('circle', { class: 'sc-dot', cx: x, cy: y, r: 5.5, fill: color });
       dot.appendChild(svgEl('title')).textContent =
-        m.display + ' — input $' + fmt(p.input) + ', output $' + fmt(p.output);
+        m.display + ' \u2014 input $' + fmt(p.input) + ', output $' + fmt(p.output);
       svg.appendChild(dot);
 
-      var above = true;
-      placed.forEach(function (q) {
-        if (Math.abs(q.x - x) < 46 && Math.abs(q.y - y) < 30 && q.above === above) above = false;
-      });
+      // pick the first candidate position that doesn't collide with placed labels
+      var est = m.display.length * 5.2; // rough label width in px
+      var chosen = CANDIDATES[0];
+      for (var c = 0; c < CANDIDATES.length; c++) {
+        var cand = CANDIDATES[c];
+        var lx = x + cand.dx, ly = y + cand.dy;
+        var hit = false;
+        for (var q = 0; q < placed.length; q++) {
+          if (Math.abs(placed[q].x - lx) < (est + placed[q].w) / 2 && Math.abs(placed[q].y - ly) < 13) {
+            hit = true; break;
+          }
+        }
+        if (!hit) { chosen = cand; break; }
+      }
       var label = svgEl('text', {
-        class: 'sc-label', x: x, y: above ? y - 10 : y + 17, 'text-anchor': 'middle'
+        class: 'sc-label', x: x + chosen.dx, y: y + chosen.dy,
+        'text-anchor': chosen.anchor || 'middle'
       });
       label.textContent = m.display;
       svg.appendChild(label);
-      placed.push({ x: x, y: y, above: above });
+      placed.push({ x: x + chosen.dx, y: y + chosen.dy, w: est });
     });
   }
 
