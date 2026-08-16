@@ -9,7 +9,7 @@
     "source_url": "本次采集所依据的官方定价页 URL",
     "collected_at": "采集日期 YYYY-MM-DD",
     "fx_rate": "本次采集所用 USD/CNY 汇率（仅 CNY 定价模型填写，USD 定价为 null）",
-    "selection_note": "canonical 选取说明（仅在应用了阶梯/峰谷规则时填写，如 'off-peak'、'<=128K tier'；无特殊选取为 null）"
+    "selection_note": "canonical 选取说明（应用阶梯/峰谷/正价规则时填写，如 off-peak、<=128K tier、list price；无特殊选取为 null）"
   },
   "prices": {
     "Gemini 3.1 Pro": {
@@ -23,14 +23,14 @@
       "selection_note": "<=200K tier (short context); Standard tier"
     },
     "Gemini 3.7 Flash": {
-      "input": 0.75,
-      "cached_input": 0.075,
-      "output": 3.75,
+      "input": 1.5,
+      "cached_input": 0.15,
+      "output": 7.5,
       "official_id": "gemini-3.7-flash",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "collected_at": "2026-08-16",
       "fx_rate": null,
-      "selection_note": "introductory pricing (through 2026-12-31); Standard tier"
+      "selection_note": "list price (short-context Standard tier); promotional $0.75/$0.075/$3.75 through 2026-12-31 ignored per protocol rule 4"
     },
     "GPT 5.6 Sol": {
       "input": 5.0,
@@ -133,14 +133,14 @@
       "selection_note": "CNY 20/2/100 at fx 6.7605; single 1M context tier"
     },
     "Minimax M3": {
-      "input": 0.3,
-      "cached_input": 0.06,
-      "output": 1.2,
+      "input": 0.6,
+      "cached_input": 0.12,
+      "output": 2.4,
       "official_id": "MiniMax-M3",
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "collected_at": "2026-08-16",
       "fx_rate": null,
-      "selection_note": "<=512k tier (short context); permanent 50% off applied (effective prices)"
+      "selection_note": "<=512k tier (short context); list price — struck-through 50% discount ignored per protocol rule 4"
     },
     "GLM 5.2": {
       "input": 1.18,
