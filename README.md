@@ -1,0 +1,13 @@
+# LLM Price
+
+Curated official API pricing for a hand-picked set of LLMs — collected from official sources, unified to USD per 1M tokens, visualized.
+
+[Live](https://llm-price.victor42.work)
+
+## Tech
+
+Static data visualization (HTML/CSS/JS). Single source of truth: `data/prices.json`. Model list curated by Victor: `config/models.json`. Price refresh follows a manual protocol (`docs/update-protocol.md`) — no auto-update mechanism by design.
+
+---
+
+Created by [Victor42](https://victor42.work/) & [Agent Vik](https://github.com/agent-vik)

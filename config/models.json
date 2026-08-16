@@ -1,0 +1,22 @@
+{
+  "description": "模型列表由 Victor 指定与维护。Agent 只更新价格数据（data/prices.json），不增删本文件中的模型。",
+  "currency": "USD per 1M tokens",
+  "models": [
+    { "display": "Gemini 3.1 Pro",   "official_id": null, "provider": "Google",     "pricing_url": null },
+    { "display": "Gemini 3.7 Flash", "official_id": null, "provider": "Google",     "pricing_url": null },
+    { "display": "GPT 5.6 Sol",      "official_id": null, "provider": "OpenAI",     "pricing_url": null },
+    { "display": "GPT 5.6 Terra",    "official_id": null, "provider": "OpenAI",     "pricing_url": null },
+    { "display": "GPT 5.6 Luna",     "official_id": null, "provider": "OpenAI",     "pricing_url": null },
+    { "display": "Claude 5 Fable",   "official_id": null, "provider": "Anthropic",  "pricing_url": null },
+    { "display": "Claude 5 Opus",    "official_id": null, "provider": "Anthropic",  "pricing_url": null },
+    { "display": "Claude 5 Sonnet",  "official_id": null, "provider": "Anthropic",  "pricing_url": null },
+    { "display": "Grok 4.6",         "official_id": null, "provider": "xAI",        "pricing_url": null },
+    { "display": "Seed 2.1",         "official_id": null, "provider": "Volcengine", "pricing_url": null },
+    { "display": "Qwen 3.8 Max",     "official_id": null, "provider": "Alibaba",    "pricing_url": null },
+    { "display": "HY 3.0",           "official_id": null, "provider": null,         "pricing_url": null },
+    { "display": "Deepseek V4 Pro",  "official_id": null, "provider": "DeepSeek",   "pricing_url": null },
+    { "display": "GLM 5.2",          "official_id": null, "provider": "Zhipu",      "pricing_url": null },
+    { "display": "Kimi K3",          "official_id": null, "provider": "Moonshot",   "pricing_url": null },
+    { "display": "Minimax M3",       "official_id": null, "provider": "MiniMax",    "pricing_url": null }
+  ]
+}
