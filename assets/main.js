@@ -12,7 +12,7 @@
     'OpenAI': '#5fd0a7',
     'Anthropic': '#e8a06a',
     'xAI': '#b48ef0',
-    'Volcengine': '#f07f8d',
+    'ByteDance': '#f07f8d',
     'Alibaba': '#8fd35f',
     'Tencent': '#5fc4e8',
     'DeepSeek': '#7d97ff',
