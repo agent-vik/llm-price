@@ -1,11 +1,11 @@
 {
-  "_comment": "真相源（Source of Truth）。本文件是本项目可视化的唯一数据源。更新规则见 docs/update-protocol.md。价格单位：USD / 1M tokens。Agent 只更新本文件中的价格与元数据，不增删模型条目（模型增删由 Victor 修改 config/models.json）。",
+  "_comment": "真相源（Source of Truth）。本文件是本项目可视化的唯一数据源。更新规则见 docs/update-protocol.md。价格单位：USD / 1M tokens。Agent 只更新本文件中的价格与元数据，不增删模型条目（模型增删由 Victor 修改 data/models.json）。",
   "_schema": {
-    "key": "模型的 display name（与 config/models.json 一致）",
+    "key": "模型的 display name（与 data/models.json 一致）",
     "input": "输入价格（USD / 1M tokens）",
     "cached_input": "缓存输入价格（USD / 1M tokens）；官方无此价则为 null",
     "output": "输出价格（USD / 1M tokens）",
-    "official_id": "官方 API 的模型 ID（与 config/models.json 同步）",
+    "official_id": "官方 API 的模型 ID（与 data/models.json 同步）",
     "source_url": "本次采集所依据的官方定价页 URL",
     "collected_at": "采集日期 YYYY-MM-DD",
     "fx_rate": "本次采集所用 USD/CNY 汇率（仅 CNY 定价模型填写，USD 定价为 null）",

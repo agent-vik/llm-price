@@ -10,7 +10,7 @@
 
 ### 2.1 基本信息
 - **GitHub**: https://github.com/agent-vik/llm-price
-- **在线地址**: https://llm-price.victor42.work（部署进行中）
+- **在线地址**: https://llm-price.victor42.work
 - **定位**: 数据可视化项目——收集指定模型的官方 API 价格并可视化
 - **核心原则**: 真相源 + 手动更新协议，项目内**无自动更新机制**
 
@@ -22,8 +22,9 @@
 - **汇率**: 每次采集用**当日最新 USD/CNY 汇率**换算 CNY 定价，并记录所用汇率
 - **元数据**: 每条价格带来源 URL / 采集日期 / 汇率 / 选取说明；**采集日期不在可视化上展示**
 - **模型身份**: 存 display name（可视化用）+ official API model ID（溯源更新用）
-- **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价；缓存输入价跟随主价同档同谷；应用规则时在 selection_note 记录依据
-- **部署**: victor42.work 子域名 `llm-price.victor42.work`
+- **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价（峰谷是永久定价结构，不算促销）；③ 缓存输入价跟随主价同档同谷；④ **短期促销价忽略，只记正价（list price）**；应用规则时在 selection_note 记录依据
+- **厂商名**: 字节跳动记为 **ByteDance**
+- **部署**: victor42.work 子域名 `llm-price.victor42.work`（GitHub Pages 源站 + Cloudflare 橙云代理，DNS 由本地化身管理）
 
 ## 3. 数据模型
 
@@ -35,37 +36,41 @@
 Victor 管理的模型列表（display / official_id / provider / pricing_url）。Agent 只可同步 `official_id` 与 `pricing_url` 两个字段，不可改名称与顺序。
 
 ### 3.3 更新协议：`docs/update-protocol.md`
-自包含的采集与更新流程，供定时任务触发的 Agent 手动执行。核心边界：**只更新价格，不增删模型**。
+自包含的采集与更新流程，供定时任务触发的 Agent 手动执行。核心边界：**只更新价格，不增删模型**。附采集经验（官方来源索引、抓取技巧、定价页常见坑、汇率来源、执行节奏）。
 
-## 4. 文件结构
+## 4. 可视化前端
+
+纯静态 HTML/CSS/JS，数据从真相源 JSON 动态渲染，无构建步骤。页面结构自上而下：
+
+1. **双向（蝴蝶）条形图**：模型名居中列，输入价条形向左、输出价条形向右，两侧各自对数刻度（$0.01–$100）；缓存价不是独立条，作为实心段嵌在输入条内（同色、输入部分降低透明度）；条形旁数值标注，缓存价以括号跟在输入价后；按厂商分组显示；顶部有对数刻度警示条（防止观众按线性读图）
+2. **Input vs Output 散点图**：双对数坐标，坐标域数据驱动自适应；每点一个模型、按厂商着色；虚线参考线 output=input；标签自动避让
+3. **完整数据表**：三维价格 + 官方来源链接
+4. **Methodology**：读图说明、正价规则、汇率换算口径、更新机制
+
+移动端自适应：中轴收窄、条形数值隐藏（看表格）、散点标签隐藏。
+
+## 5. 文件结构
 
 ```
 llm-price/
 ├── data/
 │   ├── models.json         # 模型列表（Victor 管理）
 │   └── prices.json         # 真相源（价格表）
-├── docs/update-protocol.md # 价格收集与更新协议
+├── docs/update-protocol.md # 价格收集与更新协议（含采集经验附录）
 ├── assets/
-│   ├── style.css
-│   └── main.js
-├── index.html              # 数据可视化前端
+│   ├── style.css           # 全站样式
+│   └── main.js             # 渲染逻辑（条形图 + 散点图 + 数据表）
+├── index.html              # 页面骨架
+├── CNAME                   # GitHub Pages 自定义域名
+├── LICENSE                 # MIT
 ├── notes.md                # 本文档
 └── README.md               # 仓库说明
 ```
 
-## 5. 当前状态（2026-08-16）
-
-- [x] 仓库创建（agent-vik/llm-price）
-- [x] 基础结构：config / data / docs / README / notes
-- [x] 更新协议定稿（含 canonical 选取规则、汇率、边界、采集经验附录）
-- [x] **第一轮价格采集**（16 个模型，官方来源，2026-08-16，汇率 BOC 6.7605）
-- [x] 部署：llm-price.victor42.work 已上线（GitHub Pages + CF 橙云，占位页验证通过 HTTP 200）
-- [ ] 可视化前端（形态已定：横向分组条形图、按指定顺序、对数刻度、附数据表）
-
-## 6. 模型清单（初始 16 个，顺序固定）
+## 6. 模型清单（16 个，顺序固定）
 
 Gemini 3.1 Pro / Gemini 3.7 Flash / GPT 5.6 Sol / GPT 5.6 Terra / GPT 5.6 Luna / Claude 5 Fable / Claude 5 Opus / Claude 5 Sonnet / Grok 4.6 / Seed 2.1 / Qwen 3.8 Max / HY 3.0 / Deepseek V4 Pro / GLM 5.2 / Kimi K3 / Minimax M3
 
 ---
 
-Created by [Victor42](https://victor42.work/) & [Agent Vik](https://github.com/agent-vik)
+Created by [Victor42](https://victor42.work/) & [Vik](https://github.com/agent-vik/about-me)

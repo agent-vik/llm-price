@@ -97,7 +97,6 @@ main, .site-header, .site-footer {
 
 .axis-row { height: 24px; margin-bottom: 4px; }
 .axis-side { position: relative; border-bottom: 1px solid var(--border); }
-.axis-gap { }
 .axis-tick {
   position: absolute;
   bottom: 3px;

@@ -35,7 +35,7 @@
   }
 
   function fmtTick(v) {
-    return '$' + (v < 1 ? v : v);
+    return '$' + v;
   }
 
   function hostOf(u) {
