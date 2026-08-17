@@ -6,7 +6,7 @@
 
 - 目的：从各模型**官方渠道**采集最新 API 定价，更新真相源 `data/prices.json`
 - **硬边界：Agent 只更新 `data/prices.json` 中的价格与元数据，绝不增删 `data/models.json` 中的模型**。模型的增删、改名、排序是 Victor 的决策
-- 本项目**不做自动更新机制**：本协议由 Victor 定期触发 Agent 手动执行
+- 本协议由定时任务自动触发 Agent 执行
 
 ## 1. 执行流程
 
