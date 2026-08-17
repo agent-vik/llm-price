@@ -206,12 +206,14 @@
   function renderScatter(models, prices) {
     var svg = document.getElementById('scatter');
 
-    // fit axes to the data
+    // fit axes to the data (cached prices included — tails must stay inside)
     var inputs = [], outputs = [];
     models.forEach(function (m) {
       var p = prices[m.display];
       if (!p) return;
-      inputs.push(p.input); outputs.push(p.output);
+      inputs.push(p.input);
+      if (p.cached_input != null) inputs.push(p.cached_input);
+      outputs.push(p.output);
     });
     SX = logDomain(inputs); SY = logDomain(outputs);
 
