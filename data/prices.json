@@ -133,14 +133,14 @@
       "selection_note": "CNY 20/2/100 at fx 6.7605; single 1M context tier"
     },
     "Minimax M3": {
-      "input": 0.6,
-      "cached_input": 0.12,
-      "output": 2.4,
+      "input": 0.3,
+      "cached_input": 0.06,
+      "output": 1.2,
       "official_id": "MiniMax-M3",
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "collected_at": "2026-08-16",
       "fx_rate": null,
-      "selection_note": "<=512k tier (short context); list price — struck-through 50% discount ignored per protocol rule 4"
+      "selection_note": "<=512k tier (short context); official 'Permanent 50% off' is a long-term stable price, adopted"
     },
     "GLM 5.2": {
       "input": 1.18,
