@@ -105,7 +105,7 @@ for i, name in enumerate(rows):
 # footer
 d.line([(72, 548), (W - 72, 548)], fill=BORDER, width=1)
 d.text((72, 566), 'llm-price.victor42.work', font=F_BADGE, fill=DIM)
-right = f'{len(models)} models · official list prices · refreshed on a schedule'
+right = 'Official list prices · refreshed on a schedule'
 rb = d.textbbox((0, 0), right, font=F_BADGE)
 d.text((W - 72 - (rb[2] - rb[0]), 566), right, font=F_BADGE, fill=FAINT)
 
