@@ -376,7 +376,23 @@
     });
   }
 
+  // keep only entries with numeric, positive input & output — a bad scheduled
+  // write must degrade gracefully instead of rendering NaN
+  function validate(prices) {
+    var clean = {};
+    Object.keys(prices).forEach(function (k) {
+      var p = prices[k];
+      var ok = p && typeof p.input === 'number' && p.input > 0
+        && typeof p.output === 'number' && p.output > 0
+        && (p.cached_input == null || (typeof p.cached_input === 'number' && p.cached_input > 0));
+      if (ok) clean[k] = p;
+      else console.warn('LLM Price: skipped invalid price entry:', k);
+    });
+    return clean;
+  }
+
   function init(models, prices) {
+    prices = validate(prices);
     computeDomain(prices);
     document.title = 'LLM Price — Official API Pricing of ' + models.length + ' Frontier Models';
     renderAxis();
