@@ -10,7 +10,7 @@ models = json.load(open(f'{BASE}/data/models.json'))['models']
 prices = json.load(open(f'{BASE}/data/prices.json'))['prices']
 
 # representative spread: flagship, mid, budget, cheapest
-PICK = ['Claude 5 Fable', 'GPT 5.6 Sol', 'Grok 4.6', 'Minimax M3']
+PICK = ['Claude 5 Fable', 'GPT 5.6 Sol', 'Grok 4.6', 'Deepseek V4 Flash']
 
 # ---- palette (mirrors assets/style.css) ----
 BG = (13, 17, 23)
