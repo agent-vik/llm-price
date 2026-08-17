@@ -252,16 +252,25 @@
     yl.textContent = 'Output price (USD / 1M tokens, log)';
     svg.appendChild(yl);
 
-    // dots + labels — greedy placement with candidate positions to reduce overlap
+    // dots + labels — greedy placement; right of the dot is preferred,
+    // other positions are fallbacks when there is no room
     var placed = [];
     var CANDIDATES = [
-      { dx: 0, dy: -11 },   // above
-      { dx: 0, dy: 18 },    // below
+      { dx: 11, dy: 4, anchor: 'start' },    // right of the dot (preferred)
       { dx: 10, dy: -8, anchor: 'start' },   // upper right
-      { dx: -10, dy: -8, anchor: 'end' },    // upper left
       { dx: 10, dy: 14, anchor: 'start' },   // lower right
-      { dx: -10, dy: 14, anchor: 'end' }     // lower left
+      { dx: -11, dy: 4, anchor: 'end' },     // left of the dot
+      { dx: -10, dy: -8, anchor: 'end' },    // upper left
+      { dx: -10, dy: 14, anchor: 'end' },    // lower left
+      { dx: 0, dy: -11 },                    // above
+      { dx: 0, dy: 18 }                      // below
     ];
+    function fitsPlot(cand, x, est) {
+      var lx = x + cand.dx;
+      if (cand.anchor === 'start' && lx + est > SC.w - SC.mr) return false;
+      if (cand.anchor === 'end' && lx - est < SC.ml) return false;
+      return true;
+    }
     models.forEach(function (m) {
       var p = prices[m.display];
       if (!p) return;
@@ -290,15 +299,18 @@
         ', output $' + fmt(p.output);
       svg.appendChild(dot);
 
-      // pick the first candidate position that doesn't collide with placed labels
+      // pick the first candidate that fits the plot and doesn't collide
       var est = m.display.length * 5.2; // rough label width in px
-      var chosen = CANDIDATES[0];
+      var chosen = CANDIDATES[CANDIDATES.length - 1];
       for (var c = 0; c < CANDIDATES.length; c++) {
         var cand = CANDIDATES[c];
+        if (!fitsPlot(cand, x, est)) continue;
         var lx = x + cand.dx, ly = y + cand.dy;
+        var centerX = cand.anchor === 'start' ? lx + est / 2
+                    : cand.anchor === 'end' ? lx - est / 2 : lx;
         var hit = false;
         for (var q = 0; q < placed.length; q++) {
-          if (Math.abs(placed[q].x - lx) < (est + placed[q].w) / 2 && Math.abs(placed[q].y - ly) < 13) {
+          if (Math.abs(placed[q].x - centerX) < (est + placed[q].w) / 2 && Math.abs(placed[q].y - ly) < 13) {
             hit = true; break;
           }
         }
@@ -310,7 +322,10 @@
       });
       label.textContent = m.display;
       svg.appendChild(label);
-      placed.push({ x: x + chosen.dx, y: y + chosen.dy, w: est });
+      var placedCX = chosen.anchor === 'start' ? x + chosen.dx + est / 2
+                  : chosen.anchor === 'end' ? x + chosen.dx - est / 2
+                  : x + chosen.dx;
+      placed.push({ x: placedCX, y: y + chosen.dy, w: est });
     });
   }
 
