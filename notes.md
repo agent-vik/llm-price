@@ -22,7 +22,7 @@
 - **汇率**: 每次采集用**当日最新 USD/CNY 汇率**换算 CNY 定价，并记录所用汇率
 - **元数据**: 每条价格带来源 URL / 采集日期 / 汇率 / 选取说明；**采集日期不在可视化上展示**
 - **模型身份**: 存 display name（可视化用）+ official API model ID（溯源更新用）
-- **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价（峰谷是永久定价结构，不算促销）；③ 缓存输入价跟随主价同档同谷；④ **短期促销价忽略，只记正价（list price）**；应用规则时在 selection_note 记录依据
+- **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价（峰谷是永久定价结构，不算促销）；③ 缓存输入价跟随主价同档同谷；④ **只记长期稳定价：判据是时效——官方永久/长期折扣采纳（取折后价），限时促销忽略（取促销前原价）**；应用规则时在 selection_note 记录依据
 - **厂商名**: 字节跳动记为 **ByteDance**
 - **部署**: victor42.work 子域名 `llm-price.victor42.work`（GitHub Pages 源站 + Cloudflare 橙云代理，DNS 由本地化身管理）
 
@@ -61,7 +61,9 @@ llm-price/
 ├── docs/update-protocol.md # 价格收集与更新协议（含采集经验附录）
 ├── assets/
 │   ├── style.css           # 全站样式
-│   └── main.js             # 渲染逻辑（条形图 + 散点图 + 数据表）
+│   ├── main.js             # 渲染逻辑（条形图 + 散点图 + 数据表）
+│   ├── og-image.png        # 社交分享图（og:image）
+│   └── gen-og.py           # OG 图生成脚本（数据从真相源读取，改数据后重跑）
 ├── index.html              # 页面骨架 + SEO 元数据（meta / OG / JSON-LD）
 ├── sitemap.xml             # SEO
 ├── robots.txt              # SEO
@@ -71,7 +73,7 @@ llm-price/
 └── README.md               # 仓库说明
 ```
 
-SEO 措施：完整 meta（description / keywords / author / robots）、Open Graph、Twitter Card、JSON-LD Dataset 结构化数据（含两份 JSON 数据的 DataDownload）、sitemap.xml + robots.txt、canonical URL。
+SEO 措施：完整 meta（description / keywords / author / robots）、Open Graph（含 og:image 分享图，`summary_large_image`）、Twitter Card、JSON-LD Dataset 结构化数据（含两份 JSON 数据的 DataDownload）、sitemap.xml + robots.txt、canonical URL。OG 图不含模型数量等易变信息。
 
 ## 6. 模型清单（17 个，顺序固定）
 
