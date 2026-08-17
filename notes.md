@@ -24,7 +24,7 @@
 - **模型身份**: 存 display name（可视化用）+ official API model ID（溯源更新用）
 - **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价（峰谷是永久定价结构，不算促销）；③ 缓存输入价跟随主价同档同谷；④ **只记长期稳定价：判据是时效——官方永久/长期折扣采纳（取折后价），限时促销忽略（取促销前原价）**；应用规则时在 selection_note 记录依据
 - **厂商名**: 字节跳动记为 **ByteDance**
-- **部署**: victor42.work 子域名 `llm-price.victor42.work`（GitHub Pages 源站 + Cloudflare 橙云代理，DNS 由本地化身管理）
+- **部署**: victor42.work 子域名 `llm-price.victor42.work`（GitHub Pages 源站 + Cloudflare 橙云代理）
 
 ## 3. 数据模型
 
