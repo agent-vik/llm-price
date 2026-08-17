@@ -1,6 +1,6 @@
 # 模型价格收集与更新协议
 
-*本协议自包含，可被定时任务直接执行。执行者是 Agent，操作对象是本项目仓库（`agent-vik/llm-price`）。*
+*本协议自包含，可被定时任务直接执行。操作对象是本项目仓库（`agent-vik/llm-price`）。*
 
 ## 0. 目的与边界
 
@@ -64,37 +64,39 @@
 
 ### A. 官方来源索引（直接访问，不再反复搜索）
 
-| 厂商 | 定价页 URL | 抓取方式 |
-|------|-----------|---------|
-| Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | Browser Run（open-link 只抓到导航） |
-| OpenAI | https://platform.openai.com/docs/pricing | **必须 Browser Run**（JS 渲染，/api/pricing 是订阅计划页不是 API 价） |
-| Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | open-link 直接可用 |
-| xAI | https://docs.x.ai/developers/models/grok-4.6 | 搜索摘要即有价，open-link 验证 |
-| MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | open-link 直接可用 |
-| DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | open-link 直接可用 |
-| 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | open-link 直接可用（火山方舟模型价格） |
-| 阿里 Qwen | https://help.aliyun.com/zh/model-studio/model-pricing | open-link 直接可用（国际站 alibabacloud.com 返空，用国内站） |
-| 智谱 GLM | https://bigmodel.cn/pricing | **必须 Browser Run** |
-| Moonshot Kimi | https://platform.moonshot.cn/docs/pricing/chat-k3 | 见 B-2（.md 后缀技巧） |
-| 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | **必须 Browser Run**；注意旧文档 product/1729/97731 已过期 |
+| 厂商 | 定价页 URL | 备注 |
+|------|-----------|------|
+| Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | JS 渲染页面，普通 HTTP 请求只能拿到导航骨架，需要浏览器环境提取表格数据 |
+| OpenAI | https://platform.openai.com/docs/pricing | 主站有反爬拦截；备用 https://developers.openai.com/api/docs/pricing 可直接获取完整价格表 |
+| Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | 有地区封锁（重定向到 claude.com）；可通过官方博客 + 搜索交叉验证获取价格 |
+| xAI | https://docs.x.ai/developers/models/grok-4.6 | 搜索摘要即有价格信息，打开页面验证 |
+| MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | 服务端渲染，直接可读 |
+| DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | 服务端渲染，直接可读 |
+| 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | 服务端渲染，直接可读（火山方舟模型价格） |
+| 阿里 Qwen | https://help.aliyun.com/zh/model-studio/model-pricing | 服务端渲染，直接可读（国际站 alibabacloud.com 返空，用国内站） |
+| 智谱 GLM | https://bigmodel.cn/pricing | JS 渲染页面，需要浏览器环境 |
+| Moonshot Kimi | https://platform.moonshot.cn/docs/pricing/chat-k3 | Mintlify 文档，URL 加 `.md` 后缀可直接返回 markdown 原文（见 B-2） |
+| 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | JS 渲染页面，需要浏览器环境；注意旧文档 product/1729/97731 已过期 |
 
-### B. 抓取技巧（按优先级试）
+### B. 采集策略（按优先级试）
 
-1. **open-link 先试**：能拿到正文就直接用，成本最低
+1. **直接请求**：优先尝试直接获取页面内容（HTTP 请求等），服务端渲染的页面可以直接拿到定价数据，成本最低
 2. **Mintlify 文档的 `.md` 后缀**：`<页面 URL>.md` 直接返回 markdown 原文，连定价表都在（含 JSX 组件里的数据行）——Kimi 平台文档靠这个解决
-3. **Browser Run**（Cloudflare，`/browser-run/markdown` 端点）：JS 渲染页面的标准解；注意 Quick Actions 有 10 秒间隔限制，批量抓取时串行、逐个等
-4. **`/browser-run/json` 和 `/screenshot` 不可靠**：本轮都失败或返回空，别浪费时间，直接 markdown 端点 + 自己解析
-5. **搜索摘要可作线索但不可作来源**：搜索结果里的 snippet 价格只能用来定位页面，写进真相源的必须是自己打开官方页看到的数字
+3. **浏览器渲染**：JS 重度页面（Gemini、智谱、腾讯等）需要浏览器环境才能获取完整内容。打开页面后提取表格/文本，用完即关。每次只开一个页面
+4. **官方备用入口**：同一厂商可能有多个定价页。OpenAI 主站有反爬拦截时，`developers.openai.com/api/docs/pricing` 可直接访问且包含完整价格表
+5. **搜索辅助**：搜索结果里的 snippet 价格只能用来定位页面，写进真相源的必须是自己打开官方页看到的数字。若官方页完全无法访问，官方博客/新闻稿中的定价公告可作为降级来源，但须在 selection_note 注明
 
 ### C. 定价页常见的坑（看到这些结构别慌）
 
 - **划线价 vs 生效价**：先判时效再决定取哪个。MiniMax 标注 ~~$0.60~~ $0.30 且写明 **Permanent 50% off**——永久折扣是稳定价，**取折后价 $0.30**（规则 4）。若只是限时划线价，则取划线价
 - **促销期价格**：Gemini 3.7 Flash 促销到 2026-12-31，之后翻倍——**限时**促销按规则 4 忽略，取促销结束后的正价
-- **峰谷定价生效日**：DeepSeek 在页面里写明切换日期（本轮正好撞上生效日）——注意区分「页面列的是新价还是旧价」
+- **峰谷定价生效日**：DeepSeek 在页面里写明切换日期——注意区分「页面列的是新价还是旧价」
 - **上下文阶梯**：OpenAI（Short/Long context）、Qwen（不同模型不同档）、Seed（输入长度分档）——按规则 1 取最短档
 - **缓存价的位置各家不同**：OpenAI 同表 Cached input 列；Anthropic 的「Cache Hits & Refreshes」列（注意别取成 Cache Writes）；Google/智谱/腾讯 单列「缓存命中」；Kimi「输入价格（缓存命中）」；Qwen **不在定价表里**，要去 context-cache 文档查（= 输入价 × 10%）
 - **官方 ID 不一定在定价页**：Anthropic 只有展示名（Claude Fable 5），没有 API model ID——official_id 留空，不猜
 - **同名不同价**：Seed 2.1 有 pro/turbo 两档，列表里的「Seed 2.1」对应 pro（旗舰）；拿不准时向 Victor 确认，不自行假设
+- **Seed 2.1 缓存价不在主表**：火山方舟主定价页 `doubao-seed-2.1-pro` 行的「缓存命中」列为空，需查阅上下文缓存文档确认是否有独立缓存定价
+- **Claude 5 Sonnet 促销已转正价**：2026-06-30 发布时为 $2/$10 的 introductory pricing，部分页面已标记为 standard price。采集时以页面当前标注为准，selection_note 注明
 
 ### D. 汇率
 
@@ -105,3 +107,5 @@
 
 - 全量模型一轮约 40–60 分钟；建议按厂商分批（美系 USD 一批，中系 CNY 一批），每批落盘 + commit，避免中途失败丢进度
 - Claude 系、Gemini 系同厂商多模型共享一个定价页，打开一次全部抄完
+- 汇率先查：采集开始前先从中国银行获取 USD/CNY 中间价，所有 CNY 模型共用
+- 临时文件清理：每次采集产生的 JSON/HTML 文件在写入真相源后立即删除，不要留在仓库目录中
