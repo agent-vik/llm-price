@@ -75,6 +75,8 @@ llm-price/
 
 SEO 措施：完整 meta（description / keywords / author / robots）、Open Graph（含 og:image 分享图，`summary_large_image`）、Twitter Card、JSON-LD Dataset 结构化数据（含两份 JSON 数据的 DataDownload）、sitemap.xml + robots.txt、canonical URL。OG 图不含模型数量等易变信息。
 
+统计：页面内嵌 Google Analytics（`G-14SGRFWENB`）。
+
 ## 6. 模型清单（17 个，顺序固定）
 
 Gemini 3.1 Pro / Gemini 3.7 Flash / GPT 5.6 Sol / GPT 5.6 Terra / GPT 5.6 Luna / Claude 5 Fable / Claude 5 Opus / Claude 5 Sonnet / Grok 4.6 / Seed 2.1 / Qwen 3.8 Max / HY 3.0 / Deepseek V4 Pro / Deepseek V4 Flash / GLM 5.2 / Kimi K3 / Minimax M3
