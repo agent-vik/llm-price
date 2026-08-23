@@ -74,7 +74,7 @@
 | DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | 服务端渲染，直接可读 |
 | 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | 服务端渲染，直接可读（火山方舟模型价格） |
 | 阿里 Qwen | https://help.aliyun.com/zh/model-studio/model-pricing | 服务端渲染，直接可读（国际站 alibabacloud.com 返空，用国内站） |
-| 智谱 GLM | https://bigmodel.cn/pricing | JS 渲染页面，需要浏览器环境 |
+| 智谱 GLM | https://docs.z.ai/guides/overview/pricing | Z.AI 国际站直接 USD 报价，无需汇率换算；国内 bigmodel.cn 同价但 CNY 且需浏览器渲染 |
 | Moonshot Kimi | https://platform.moonshot.cn/docs/pricing/chat-k3 | Mintlify 文档，URL 加 `.md` 后缀可直接返回 markdown 原文（见 B-2） |
 | 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | JS 渲染页面，需要浏览器环境；注意旧文档 product/1729/97731 已过期 |
 

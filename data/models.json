@@ -87,10 +87,10 @@
       "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "display": "GLM 5.2",
-      "official_id": "glm-5.2",
+      "display": "GLM 5.3",
+      "official_id": "glm-5.3",
       "provider": "Zhipu",
-      "pricing_url": "https://bigmodel.cn/pricing"
+      "pricing_url": "https://docs.z.ai/guides/overview/pricing"
     },
     {
       "display": "Kimi K3",

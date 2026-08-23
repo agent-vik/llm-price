@@ -142,15 +142,15 @@
       "fx_rate": null,
       "selection_note": "<=512k tier (short context); official 'Permanent 50% off' is a long-term stable price, adopted"
     },
-    "GLM 5.2": {
-      "input": 1.02,
-      "cached_input": 0.25,
-      "output": 3.55,
-      "official_id": "glm-5.2",
-      "source_url": "https://bigmodel.cn/pricing",
-      "collected_at": "2026-08-21",
-      "fx_rate": 7.8808,
-      "selection_note": "CNY 8/2/28 at fx 7.8808; single 1M context tier"
+    "GLM 5.3": {
+      "input": 1.4,
+      "cached_input": 0.26,
+      "output": 4.4,
+      "official_id": "glm-5.3",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "collected_at": "2026-08-23",
+      "fx_rate": null,
+      "selection_note": "single tier; USD direct pricing (Z.AI international docs)"
     },
     "Qwen 3.8 Max": {
       "input": 1.52,
