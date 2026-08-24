@@ -10,4 +10,4 @@ Static data visualization (HTML/CSS/JS). Single source of truth: `data/prices.js
 
 ---
 
-Created by [Victor42](https://victor42.work/) & [Agent Vik](https://github.com/agent-vik)
+Created by [Victor42](https://victor42.work/) & [Agent Vik](https://github.com/agent-vik/about-me)
