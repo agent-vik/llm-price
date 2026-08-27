@@ -148,9 +148,19 @@
       "output": 4.4,
       "official_id": "glm-5.3",
       "source_url": "https://docs.z.ai/guides/overview/pricing",
-      "collected_at": "2026-08-23",
+      "collected_at": "2026-08-27",
       "fx_rate": null,
       "selection_note": "single tier; USD direct pricing (Z.AI international docs)"
+    },
+    "GLM 5.3 Flash": {
+      "input": 0.15,
+      "cached_input": 0.03,
+      "output": 0.5,
+      "official_id": "glm-5.3-flash",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "collected_at": "2026-08-27",
+      "fx_rate": null,
+      "selection_note": "list price; limited-time 50% off promo (two weeks) ignored per protocol rule 4"
     },
     "Qwen 3.8 Max": {
       "input": 2.0,

@@ -93,6 +93,12 @@
       "pricing_url": "https://docs.z.ai/guides/overview/pricing"
     },
     {
+      "display": "GLM 5.3 Flash",
+      "official_id": "glm-5.3-flash",
+      "provider": "Zhipu",
+      "pricing_url": "https://docs.z.ai/guides/overview/pricing"
+    },
+    {
       "display": "Kimi K3",
       "official_id": "kimi-k3",
       "provider": "Moonshot",
