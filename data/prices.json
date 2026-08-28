@@ -113,14 +113,14 @@
       "selection_note": "off-peak pricing (effective 2026-08-16); input = cache miss rate"
     },
     "Seed 2.1": {
-      "input": 0.76,
-      "cached_input": 0.15,
-      "output": 3.81,
+      "input": 0.89,
+      "cached_input": 0.18,
+      "output": 4.46,
       "official_id": "doubao-seed-2.1-pro",
       "source_url": "https://www.volcengine.com/docs/82379/1544106",
-      "collected_at": "2026-08-21",
-      "fx_rate": 7.8808,
-      "selection_note": "<=256K tier (short context); CNY 6/1.2/30 at fx 7.8808"
+      "collected_at": "2026-08-28",
+      "fx_rate": 6.72445,
+      "selection_note": "<=256K tier (short context); CNY 6/1.2/30 at fx 6.72445"
     },
     "Kimi K3": {
       "input": 3.0,
@@ -173,14 +173,14 @@
       "selection_note": "USD direct pricing (international Model Studio); cached = 10% of input per context-cache doc"
     },
     "HY 3.0": {
-      "input": 0.13,
-      "cached_input": 0.03,
-      "output": 0.51,
+      "input": 0.15,
+      "cached_input": 0.04,
+      "output": 0.59,
       "official_id": "hy3",
       "source_url": "https://cloud.tencent.com/document/product/1823/130055",
-      "collected_at": "2026-08-21",
-      "fx_rate": 7.8808,
-      "selection_note": "CNY 1/0.25/4 at fx 7.8808; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
+      "collected_at": "2026-08-28",
+      "fx_rate": 6.72445,
+      "selection_note": "CNY 1/0.25/4 at fx 6.72445; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
     },
     "Deepseek V4 Flash": {
       "input": 0.22,
