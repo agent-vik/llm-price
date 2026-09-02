@@ -253,3 +253,28 @@ tbody tr:hover { background: #1a2029; }
   .group-name { font-size: 0.58rem; }
   .sc-label { display: none; }
 }
+
+/* Chart save button */
+.chart-save-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+.chart:hover .chart-save-btn,
+.scatter-wrap:hover .chart-save-btn {
+  opacity: 1;
+}
+.chart-save-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
