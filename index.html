@@ -73,7 +73,6 @@
     </div>
 
     <div class="chart" id="chart" role="img" aria-label="Diverging bar chart: input prices extend left, output prices extend right, both on logarithmic scales">
-      <button class="chart-save-btn" data-chart="bar">Save as image</button>
       <div class="axis-row">
         <div class="axis-side" id="axis-left"></div>
         <div class="axis-gap"></div>
@@ -86,8 +85,7 @@
   <section class="panel">
     <h2 class="panel-title">Price Space</h2>
     <p class="panel-sub">Each dot is a model (log–log scale — every grid step is ×10). Dashed line: output = input. Dots above the line charge more for output than input. A tail stretching left from a dot marks its cached-input price — the longer the tail, the deeper the cache discount; no tail means no cached price published.</p>
-    <div class="scatter-wrap" style="position: relative;">
-      <button class="chart-save-btn" data-chart="scatter">Save as image</button>
+    <div class="scatter-wrap">
       <svg id="scatter" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Scatter plot of input versus output price per model"></svg>
     </div>
     <div class="vendor-legend" id="vendor-legend"></div>
@@ -127,6 +125,6 @@
   <p class="copyright">Created by <a href="https://victor42.work" target="_blank" rel="noopener">Victor42</a> &amp; <a href="https://github.com/agent-vik/about-me" target="_blank" rel="noopener">Vik</a> | <a href="https://github.com/agent-vik/llm-price" target="_blank" rel="noopener">Code</a></p>
 </footer>
 
-<script src="assets/main.js?v=2"></script>
+<script src="assets/main.js"></script>
 </body>
 </html>
