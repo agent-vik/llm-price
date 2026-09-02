@@ -267,12 +267,7 @@ tbody tr:hover { background: #1a2029; }
   border: 1px solid var(--border);
   border-radius: 6px;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s, background 0.2s;
-}
-.chart:hover .chart-save-btn,
-.scatter-wrap:hover .chart-save-btn {
-  opacity: 1;
+  z-index: 10;
 }
 .chart-save-btn:hover {
   background: var(--bg-tertiary);

@@ -434,109 +434,105 @@
     document.body.removeChild(link);
   }
   
-  function addWatermark(ctx, width, height) {
-    var padding = 20;
+  function addWatermark(canvas) {
+    var ctx = canvas.getContext('2d');
+    var width = canvas.width;
+    var height = canvas.height;
+    var padding = 16;
     var fontSize = 14;
+    var text = SITE_URL;
+    
     ctx.font = fontSize + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.fillStyle = '#6b7484';
+    var metrics = ctx.measureText(text);
+    var textWidth = metrics.width;
+    
+    // 半透明背景条
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.fillRect(width - textWidth - padding * 2, height - fontSize - padding * 1.5, textWidth + padding * 2, fontSize + padding);
+    
+    // 文字
+    ctx.fillStyle = '#4a5568';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'bottom';
-    ctx.fillText(SITE_URL, width - padding, height - padding);
+    ctx.fillText(text, width - padding, height - padding);
   }
   
-  function exportBarChart() {
-    var chartEl = document.getElementById('chart');
-    if (!chartEl) return;
-    
-    // Create canvas
+  function captureElement(el, filename) {
+    // 创建 canvas
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    var rect = chartEl.getBoundingClientRect();
+    var rect = el.getBoundingClientRect();
     var dpr = window.devicePixelRatio || 1;
     
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
-    canvas.style.width = rect.width + 'px';
-    canvas.style.height = rect.height + 'px';
-    ctx.scale(dpr, dpr);
     
-    // Fill background
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                 window.matchMedia('(prefers-color-scheme: dark)').matches;
-    ctx.fillStyle = isDark ? '#1a1d21' : '#ffffff';
-    ctx.fillRect(0, 0, rect.width, rect.height);
+    // 填充背景（项目固定为暗色主题）
+    ctx.fillStyle = '#0d1117';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Use html2canvas if available, otherwise fallback to SVG serialization
-    if (typeof html2canvas !== 'undefined') {
-      html2canvas(chartEl, {
-        canvas: canvas,
-        scale: dpr,
-        backgroundColor: isDark ? '#1a1d21' : '#ffffff'
-      }).then(function(canvas) {
-        addWatermark(canvas.getContext('2d'), canvas.width / dpr, canvas.height / dpr);
-        downloadImage(canvas.toDataURL('image/png'), 'llm-price-bar-chart.png');
-      });
-    } else {
-      // Fallback: try to capture as SVG
-      var svgData = new XMLSerializer().serializeToString(chartEl);
-      var svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
-      var url = URL.createObjectURL(svgBlob);
+    // 对于 SVG 元素（散点图），直接序列化
+    var svgEl = el.querySelector('svg') || (el.tagName === 'svg' ? el : null);
+    if (svgEl) {
+      var svgData = new XMLSerializer().serializeToString(svgEl);
       var img = new Image();
       img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        addWatermark(ctx, rect.width, rect.height);
-        downloadImage(canvas.toDataURL('image/png'), 'llm-price-bar-chart.png');
-        URL.revokeObjectURL(url);
+        ctx.drawImage(img, 0, 0, rect.width * dpr, rect.height * dpr);
+        addWatermarkToCtx(ctx, canvas.width, canvas.height);
+        downloadImage(canvas.toDataURL('image/png'), filename);
       };
-      img.src = url;
+      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+    } else {
+      // 对于 HTML 元素（条形图），用 html2canvas
+      if (typeof html2canvas === 'undefined') {
+        console.error('html2canvas not loaded');
+        return;
+      }
+      html2canvas(el, {
+        scale: dpr,
+        backgroundColor: '#0d1117',
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+      }).then(function(h2cCanvas) {
+        ctx.drawImage(h2cCanvas, 0, 0);
+        addWatermarkToCtx(ctx, canvas.width, canvas.height);
+        downloadImage(canvas.toDataURL('image/png'), filename);
+      });
     }
   }
   
-  function exportScatterChart() {
-    var svgEl = document.getElementById('scatter');
-    if (!svgEl) return;
+  function addWatermarkToCtx(ctx, width, height) {
+    var padding = 16;
+    var fontSize = 14;
+    var text = SITE_URL;
     
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-    var rect = svgEl.getBoundingClientRect();
-    var dpr = window.devicePixelRatio || 1;
+    ctx.font = fontSize + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    var metrics = ctx.measureText(text);
+    var textWidth = metrics.width;
     
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
+    // 半透明背景
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillRect(width - textWidth - padding * 2, height - fontSize - padding * 1.5, textWidth + padding * 2, fontSize + padding);
     
-    // Fill background
-    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                 window.matchMedia('(prefers-color-scheme: dark)').matches;
-    ctx.fillStyle = isDark ? '#1a1d21' : '#ffffff';
-    ctx.fillRect(0, 0, rect.width, rect.height);
-    
-    // Serialize SVG
-    var svgData = new XMLSerializer().serializeToString(svgEl);
-    var svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
-    var url = URL.createObjectURL(svgBlob);
-    var img = new Image();
-    
-    img.onload = function() {
-      ctx.drawImage(img, 0, 0, rect.width, rect.height);
-      addWatermark(ctx, rect.width, rect.height);
-      downloadImage(canvas.toDataURL('image/png'), 'llm-price-scatter-chart.png');
-      URL.revokeObjectURL(url);
-    };
-    
-    img.src = url;
+    // 文字
+    ctx.fillStyle = '#4a5568';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(text, width - padding, height - padding);
   }
   
-  // Bind buttons
   document.addEventListener('DOMContentLoaded', function() {
     var btns = document.querySelectorAll('.chart-save-btn');
     btns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         var type = this.getAttribute('data-chart');
         if (type === 'bar') {
-          exportBarChart();
+          var chartEl = document.getElementById('chart');
+          if (chartEl) captureElement(chartEl, 'llm-price-bar-chart.png');
         } else if (type === 'scatter') {
-          exportScatterChart();
+          var wrapEl = document.querySelector('.scatter-wrap');
+          if (wrapEl) captureElement(wrapEl, 'llm-price-scatter-chart.png');
         }
       });
     });
