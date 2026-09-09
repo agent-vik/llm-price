@@ -9,12 +9,6 @@
       "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing"
     },
     {
-      "display": "Gemini 3.7 Flash",
-      "official_id": "gemini-3.7-flash",
-      "provider": "Google",
-      "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing"
-    },
-    {
       "display": "Gemini 3.8 Flash",
       "official_id": "gemini-3.8-flash",
       "provider": "Google",
@@ -39,13 +33,13 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "GPT-6 Astra",
+      "display": "GPT 6 Astra",
       "official_id": "gpt-6-astra",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "Claude 5 Fable",
+      "display": "Claude 5.1 Fable",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
@@ -58,12 +52,6 @@
     },
     {
       "display": "Claude 5 Sonnet",
-      "official_id": null,
-      "provider": "Anthropic",
-      "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
-    },
-    {
-      "display": "Claude 5.1 Fable",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
