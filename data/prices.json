@@ -32,6 +32,16 @@
       "fx_rate": null,
       "selection_note": "list price (short-context Standard tier); promotional $0.75/$0.075/$3.75 through 2026-12-31 ignored per protocol rule 4"
     },
+    "Gemini 3.8 Flash": {
+      "input": 1.5,
+      "cached_input": 0.15,
+      "output": 7.5,
+      "official_id": "gemini-3.8-flash",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "collected_at": "2026-09-09",
+      "fx_rate": null,
+      "selection_note": "list price (short-context Standard tier); promotional $0.75/$0.075/$3.75 through 2026-12-31 ignored per protocol rule 4"
+    },
     "GPT 5.6 Sol": {
       "input": 4.0,
       "cached_input": 0.4,
@@ -62,6 +72,16 @@
       "fx_rate": null,
       "selection_note": "short context; Standard tier"
     },
+    "GPT-6 Astra": {
+      "input": 10.0,
+      "cached_input": 1.0,
+      "output": 50.0,
+      "official_id": "gpt-6-astra",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "collected_at": "2026-09-09",
+      "fx_rate": null,
+      "selection_note": "short context (<=272K); Standard tier"
+    },
     "Claude 5 Fable": {
       "input": 10.0,
       "cached_input": 1.0,
@@ -91,6 +111,16 @@
       "collected_at": "2026-09-05",
       "fx_rate": null,
       "selection_note": null
+    },
+    "Claude 5.1 Fable": {
+      "input": 10.0,
+      "cached_input": 0.25,
+      "output": 50.0,
+      "official_id": null,
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "collected_at": "2026-09-09",
+      "fx_rate": null,
+      "selection_note": "cache read price reduced 75% from Fable 5"
     },
     "Grok 4.6": {
       "input": 2.0,
