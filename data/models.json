@@ -87,10 +87,16 @@
       "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
     },
     {
-      "display": "Deepseek V4 Flash",
-      "official_id": "deepseek-v4-flash",
+      "display": "Deepseek V4.1 Flash",
+      "official_id": "deepseek-flash",
       "provider": "DeepSeek",
       "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
+    },
+    {
+      "display": "Hy4 preview",
+      "official_id": "hy4-preview",
+      "provider": "Tencent",
+      "pricing_url": "https://hunyuan.tencent.com/research/hy4-preview"
     },
     {
       "display": "GLM 5.3",

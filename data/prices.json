@@ -192,15 +192,25 @@
       "fx_rate": 6.7787,
       "selection_note": "CNY 1/0.25/4 at fx 6.7787; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
     },
-    "Deepseek V4 Flash": {
-      "input": 0.22,
-      "cached_input": 0.007,
-      "output": 0.66,
-      "official_id": "deepseek-v4-flash",
+    "Deepseek V4.1 Flash": {
+      "input": 0.15,
+      "cached_input": 0.003,
+      "output": 0.6,
+      "official_id": "deepseek-flash",
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
-      "collected_at": "2026-09-05",
+      "collected_at": "2026-09-10",
       "fx_rate": null,
-      "selection_note": "off-peak pricing; input = cache miss rate"
+      "selection_note": "off-peak pricing; released 2026-09-10; cache hit price reduced from $0.007 to $0.003"
+    },
+    "Hy4 preview": {
+      "input": 6.0,
+      "cached_input": 0.3,
+      "output": 18.0,
+      "official_id": "hy4-preview",
+      "source_url": "https://hunyuan.tencent.com/research/hy4-preview",
+      "collected_at": "2026-09-10",
+      "fx_rate": 6.7766,
+      "selection_note": "CNY 6/0.3/18 at fx 6.7766; released 2026-08-28; 770B total params, 49B active, 1M context"
     }
   }
 }
