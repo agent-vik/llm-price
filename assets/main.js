@@ -409,8 +409,8 @@
   }
 
   Promise.all([
-    fetch('data/models.json').then(function (r) { return r.json(); }),
-    fetch('data/prices.json').then(function (r) { return r.json(); })
+    fetch('data/models.json?t=' + Date.now()).then(function (r) { return r.json(); }),
+    fetch('data/prices.json?t=' + Date.now()).then(function (r) { return r.json(); })
   ]).then(function (res) {
     init(res[0].models, res[1].prices);
   }).catch(function (err) {
