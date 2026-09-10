@@ -7,7 +7,7 @@
 - 目的：从各模型**官方渠道**采集最新 API 定价，更新真相源 `data/prices.json`
 - **硬边界：Agent 只更新 `data/prices.json` 中的价格与元数据，绝不增删 `data/models.json` 中的模型**。模型的增删、改名、排序是 Victor 的决策
 - **新模型发现汇报**：若官方定价页出现现有模型的更新版本（如 GLM-5.3 → GLM-5.4），Agent 应在任务完成后的汇报中明确列出「检测到模型更新：XXX → YYY，建议添加」，但不自动写入 `models.json`。新增全新厂商/系列模型不在此列
-- **模型版本代替规则**：同一厂商的同一产品线出现更新版本时（如 Gemini 3.7 Flash → Gemini 3.8 Flash、Claude 5 Fable → Claude 5.1 Fable），**新版本代替旧版本**，旧版本从列表移除。只有跨代际或全新产品线的模型才追加（如 GPT 5.6 → GPT 6 Astra）
+- **模型版本代替规则**：同一厂商的同一产品线出现更新版本时（如 Gemini 3.7 Flash → Gemini 3.8 Flash、Claude 5 Fable → Claude 5.1 Fable），**新版本代替旧版本**，旧版本从列表移除。只有**全新产品线**的模型才追加（如 GPT 5.6 系列之外新增 GPT 6 Astra 系列）
 - 本协议由定时任务自动触发 Agent 执行
 
 ## 1. 执行流程
