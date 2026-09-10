@@ -75,12 +75,6 @@
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
     {
-      "display": "HY 3.0",
-      "official_id": "hy3",
-      "provider": "Tencent",
-      "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
-    },
-    {
       "display": "Deepseek V4 Pro",
       "official_id": "deepseek-v4-pro",
       "provider": "DeepSeek",

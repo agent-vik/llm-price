@@ -182,16 +182,6 @@
       "fx_rate": null,
       "selection_note": "USD direct pricing (international Model Studio); cached = 10% of input per context-cache doc; limited-time 30% promo ignored per protocol rule 4"
     },
-    "HY 3.0": {
-      "input": 0.15,
-      "cached_input": 0.04,
-      "output": 0.59,
-      "official_id": "hy3",
-      "source_url": "https://cloud.tencent.com/document/product/1823/130055",
-      "collected_at": "2026-09-05",
-      "fx_rate": 6.7787,
-      "selection_note": "CNY 1/0.25/4 at fx 6.7787; official = Hy3 (preview tier retiring 2026-08-31); TokenHub unified pricing, no context tiers"
-    },
     "Deepseek V4.1 Flash": {
       "input": 0.15,
       "cached_input": 0.003,
