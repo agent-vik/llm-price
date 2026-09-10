@@ -75,6 +75,12 @@
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
     {
+      "display": "Hy4 preview",
+      "official_id": "hy4-preview",
+      "provider": "Tencent",
+      "pricing_url": "https://hunyuan.tencent.com/research/hy4-preview"
+    },
+    {
       "display": "Deepseek V4 Pro",
       "official_id": "deepseek-v4-pro",
       "provider": "DeepSeek",
@@ -85,12 +91,6 @@
       "official_id": "deepseek-flash",
       "provider": "DeepSeek",
       "pricing_url": "https://api-docs.deepseek.com/quick_start/pricing"
-    },
-    {
-      "display": "Hy4 preview",
-      "official_id": "hy4-preview",
-      "provider": "Tencent",
-      "pricing_url": "https://hunyuan.tencent.com/research/hy4-preview"
     },
     {
       "display": "GLM 5.3",
