@@ -394,7 +394,7 @@
   function init(models, prices) {
     prices = validate(prices);
     computeDomain(prices);
-    document.title = 'LLM Price — Official API Pricing of ' + models.length + ' Frontier Models';
+    document.title = 'LLM Price — Official API Pricing of Frontier Models';
     renderAxis();
     var rowsEl = document.getElementById('rows');
     renderGridlines(rowsEl);
