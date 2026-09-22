@@ -71,7 +71,7 @@
 | Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | JS 渲染页面，普通 HTTP 请求只能拿到导航骨架，需要浏览器环境提取表格数据 |
 | OpenAI | https://platform.openai.com/docs/pricing | 主站有反爬拦截；备用 https://developers.openai.com/api/docs/pricing 可直接获取完整价格表 |
 | Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | 有地区封锁（重定向到 claude.com）；可通过官方博客 + 搜索交叉验证获取价格 |
-| xAI | https://docs.x.ai/developers/models/grok-4.6 | 搜索摘要即有价格信息，打开页面验证 |
+| xAI | https://docs.x.ai/developers/models/grok-4.7 | 搜索摘要即有价格信息，打开页面验证 |
 | MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | 服务端渲染，直接可读 |
 | DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | 服务端渲染，直接可读 |
 | 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | 服务端渲染，直接可读（火山方舟模型价格） |
