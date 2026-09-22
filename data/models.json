@@ -111,6 +111,18 @@
       "pricing_url": "https://platform.kimi.ai"
     },
     {
+      "display": "MiMo 2.6 Pro",
+      "official_id": "mimo-v2.6-pro",
+      "provider": "Xiaomi",
+      "pricing_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go"
+    },
+    {
+      "display": "MiMo 2.6 Flash",
+      "official_id": "mimo-v2.6-flash",
+      "provider": "Xiaomi",
+      "pricing_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go"
+    },
+    {
       "display": "Minimax M3",
       "official_id": "MiniMax-M3",
       "provider": "MiniMax",

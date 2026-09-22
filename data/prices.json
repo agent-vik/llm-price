@@ -201,6 +201,26 @@
       "collected_at": "2026-09-21",
       "fx_rate": 6.7521,
       "selection_note": "CNY 6/0.3/18 at fx 6.7521; doc updated 2026-09-18"
+    },
+    "MiMo 2.6 Pro": {
+      "input": 0.435,
+      "cached_input": 0.0036,
+      "output": 0.87,
+      "official_id": "mimo-v2.6-pro",
+      "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
+      "collected_at": "2026-09-22",
+      "fx_rate": null,
+      "selection_note": "real-time inference, overseas USD pricing; domestic CNY list is 3/0.025/6"
+    },
+    "MiMo 2.6 Flash": {
+      "input": 0.14,
+      "cached_input": 0.0028,
+      "output": 0.28,
+      "official_id": "mimo-v2.6-flash",
+      "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
+      "collected_at": "2026-09-22",
+      "fx_rate": null,
+      "selection_note": "real-time inference, overseas USD pricing; domestic CNY list is 1/0.02/2"
     }
   }
 }
