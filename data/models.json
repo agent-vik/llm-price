@@ -75,14 +75,14 @@
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
     {
-      "display": "Qwen 3.8 Flash",
-      "official_id": "qwen3.8-flash",
+      "display": "Qwen 3.7 Plus",
+      "official_id": "qwen3.7-plus",
       "provider": "Alibaba",
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
     {
-      "display": "Qwen 3.7 Plus",
-      "official_id": "qwen3.7-plus",
+      "display": "Qwen 3.8 Flash",
+      "official_id": "qwen3.8-flash",
       "provider": "Alibaba",
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
