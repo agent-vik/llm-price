@@ -221,6 +221,26 @@
       "collected_at": "2026-09-22",
       "fx_rate": null,
       "selection_note": "real-time inference, overseas USD pricing; domestic CNY list is 1/0.02/2"
+    },
+    "Qwen 3.8 Flash": {
+      "input": 0.15,
+      "cached_input": 0.015,
+      "output": 0.47,
+      "official_id": "qwen3.8-flash",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "collected_at": "2026-09-22",
+      "fx_rate": null,
+      "selection_note": "International; 0<Token<=1M; cache = input x 10%"
+    },
+    "Qwen 3.7 Plus": {
+      "input": 0.4,
+      "cached_input": 0.04,
+      "output": 1.6,
+      "official_id": "qwen3.7-plus",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "collected_at": "2026-09-22",
+      "fx_rate": null,
+      "selection_note": "International; 0<Token<=256K tier; list price, limited-time 20% off ignored per rule 4; cache = input x 10%"
     }
   }
 }

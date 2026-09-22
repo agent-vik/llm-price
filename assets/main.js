@@ -25,17 +25,18 @@
   }
 
   var VENDOR_COLORS = {
-    'Google': '#6ea8fe',
-    'OpenAI': '#5fd0a7',
-    'Anthropic': '#e8a06a',
-    'xAI': '#b48ef0',
-    'ByteDance': '#f07f8d',
-    'Alibaba': '#8fd35f',
-    'Tencent': '#5fc4e8',
-    'DeepSeek': '#7d97ff',
-    'Zhipu': '#e8d35f',
-    'Moonshot': '#f0a8c8',
-    'MiniMax': '#c0c8d8'
+    'Google': '#3F84F3',
+    'OpenAI': '#10A37F',
+    'Anthropic': '#D97757',
+    'xAI': '#8B9BB0',
+    'ByteDance': '#AEBEF4',
+    'Alibaba': '#684EEF',
+    'Tencent': '#0551A8',
+    'DeepSeek': '#0017EB',
+    'Zhipu': '#8F80DB',
+    'Moonshot': '#AC33F2',
+    'Xiaomi': '#FF6900',
+    'MiniMax': '#F44454'
   };
 
   function pct(v) {
