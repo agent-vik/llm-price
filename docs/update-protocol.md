@@ -79,6 +79,7 @@
 | 智谱 GLM | https://docs.z.ai/guides/overview/pricing | Z.AI 国际站直接 USD 报价，无需汇率换算；国内 bigmodel.cn 同价但 CNY 且需浏览器渲染 |
 | Moonshot Kimi | https://platform.kimi.ai | 国际站直接 USD 报价，无需汇率换算；国内 moonshot.cn 同价但 CNY |
 | 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | JS 渲染页面，需要浏览器环境；注意旧文档 product/1729/97731 已过期 |
+| 小米 MiMo | https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go | 直接可读；同页含国内 CNY 与海外 USD 两套定价，按国际站惯例取海外 USD 价 |
 
 ### B. 采集策略（按优先级试）
 
@@ -99,6 +100,7 @@
 - **同名不同价**：Seed 2.1 有 pro/turbo 两档，列表里的「Seed 2.1」对应 pro（旗舰）；拿不准时向 Victor 确认，不自行假设
 - **Seed 2.1 缓存价不在主表**：火山方舟主定价页 `doubao-seed-2.1-pro` 行的「缓存命中」列为空，需查阅上下文缓存文档确认是否有独立缓存定价
 - **Claude 5 Sonnet 促销已转正价**：2026-06-30 发布时为 $2/$10 的 introductory pricing，部分页面已标记为 standard price。采集时以页面当前标注为准，selection_note 注明
+- **推理类型分档（非上下文阶梯）**：小米 MiMo 定价表分「实时推理 / 批量推理」两档，批量价为实时的 50%——取**实时推理**档（批量是异步批量场景专用，非标准价），selection_note 注明
 
 ### D. 汇率
 
