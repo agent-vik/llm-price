@@ -33,7 +33,7 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "Claude 5.1 Fable",
+      "display": "Claude Fable 5.1",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
@@ -45,7 +45,7 @@
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
-      "display": "Claude 5 Sonnet",
+      "display": "Claude Sonnet 5",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
