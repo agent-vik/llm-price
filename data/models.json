@@ -21,20 +21,14 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "GPT 5.6 Sol",
-      "official_id": "gpt-5.6-sol",
+      "display": "GPT 6 Sol",
+      "official_id": "gpt-6-sol",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "GPT 5.6 Terra",
-      "official_id": "gpt-5.6-terra",
-      "provider": "OpenAI",
-      "pricing_url": "https://developers.openai.com/api/docs/pricing"
-    },
-    {
-      "display": "GPT 5.6 Luna",
-      "official_id": "gpt-5.6-luna",
+      "display": "GPT 6 Luna",
+      "official_id": "gpt-6-luna",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
@@ -45,7 +39,7 @@
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
-      "display": "Claude 5 Opus",
+      "display": "Claude Opus 5.5",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"

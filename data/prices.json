@@ -18,7 +18,7 @@
       "output": 12.0,
       "official_id": "gemini-3.1-pro-preview",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "<=200K tier (short context); Standard tier"
     },
@@ -28,39 +28,9 @@
       "output": 7.5,
       "official_id": "gemini-3.8-flash",
       "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "list price (short-context Standard tier); promotional $0.75/$0.075/$3.75 through 2026-12-31 ignored per protocol rule 4"
-    },
-    "GPT 5.6 Sol": {
-      "input": 4.0,
-      "cached_input": 0.4,
-      "output": 20.0,
-      "official_id": "gpt-5.6-sol",
-      "source_url": "https://developers.openai.com/api/docs/pricing",
-      "collected_at": "2026-09-21",
-      "fx_rate": null,
-      "selection_note": "Standard tier, short context; promotional pricing through at least 2026-11-21"
-    },
-    "GPT 5.6 Terra": {
-      "input": 2.0,
-      "cached_input": 0.2,
-      "output": 12.0,
-      "official_id": "gpt-5.6-terra",
-      "source_url": "https://developers.openai.com/api/docs/pricing",
-      "collected_at": "2026-09-21",
-      "fx_rate": null,
-      "selection_note": "Standard tier, short context"
-    },
-    "GPT 5.6 Luna": {
-      "input": 0.2,
-      "cached_input": 0.02,
-      "output": 1.2,
-      "official_id": "gpt-5.6-luna",
-      "source_url": "https://developers.openai.com/api/docs/pricing",
-      "collected_at": "2026-09-21",
-      "fx_rate": null,
-      "selection_note": "Standard tier, short context"
     },
     "GPT 6 Astra": {
       "input": 10.0,
@@ -68,7 +38,7 @@
       "output": 50.0,
       "official_id": "gpt-6-astra",
       "source_url": "https://developers.openai.com/api/docs/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "Standard processing; short context (<=272K); Long-context tier available"
     },
@@ -78,17 +48,7 @@
       "output": 50.0,
       "official_id": null,
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "collected_at": "2026-09-21",
-      "fx_rate": null,
-      "selection_note": null
-    },
-    "Claude 5 Opus": {
-      "input": 5.0,
-      "cached_input": 0.5,
-      "output": 25.0,
-      "official_id": null,
-      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": null
     },
@@ -98,7 +58,7 @@
       "output": 10.0,
       "official_id": null,
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": null
     },
@@ -108,19 +68,19 @@
       "output": 1.98,
       "official_id": "deepseek-v4-pro",
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "off-peak pricing"
     },
     "Seed 2.1": {
       "input": 0.89,
       "cached_input": 0.18,
-      "output": 4.44,
+      "output": 4.45,
       "official_id": "doubao-seed-2.1-pro",
       "source_url": "https://www.volcengine.com/docs/82379/1544106",
-      "collected_at": "2026-09-21",
-      "fx_rate": 6.7521,
-      "selection_note": "CNY 6/1.2/30 at fx 6.7521; pro tier (旗舰); input length [0,1024] tier"
+      "collected_at": "2026-09-23",
+      "fx_rate": 6.7468,
+      "selection_note": "CNY 6/1.2/30 at fx 6.7521; CNY 6/1.2/30 at fx 6.7468"
     },
     "Kimi K3": {
       "input": 3.0,
@@ -128,7 +88,7 @@
       "output": 15.0,
       "official_id": "kimi-k3",
       "source_url": "https://platform.kimi.ai/docs/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": null
     },
@@ -138,7 +98,7 @@
       "output": 1.2,
       "official_id": "MiniMax-M3",
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "Permanent 50% off, adopted; Standard priority; <=512k tier"
     },
@@ -148,7 +108,7 @@
       "output": 4.4,
       "official_id": "glm-5.3",
       "source_url": "https://docs.z.ai/guides/overview/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": null
     },
@@ -158,7 +118,7 @@
       "output": 0.5,
       "official_id": "glm-5.3-flash",
       "source_url": "https://docs.z.ai/guides/overview/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": null
     },
@@ -168,7 +128,7 @@
       "output": 6.0,
       "official_id": "qwen3.8-max",
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "International; 0<Token<=1M; cache = input x 10%"
     },
@@ -178,7 +138,7 @@
       "output": 0.6,
       "official_id": "deepseek-flash",
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
-      "collected_at": "2026-09-21",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "off-peak pricing"
     },
@@ -188,9 +148,9 @@
       "output": 2.67,
       "official_id": "hy4-preview",
       "source_url": "https://cloud.tencent.com/document/product/1823/130055",
-      "collected_at": "2026-09-21",
-      "fx_rate": 6.7521,
-      "selection_note": "CNY 6/0.3/18 at fx 6.7521; doc updated 2026-09-18"
+      "collected_at": "2026-09-23",
+      "fx_rate": 6.7468,
+      "selection_note": "CNY 6/0.3/18 at fx 6.7521; CNY 6/0.3/18 at fx 6.7468"
     },
     "MiMo 2.6 Pro": {
       "input": 0.435,
@@ -198,7 +158,7 @@
       "output": 0.87,
       "official_id": "mimo-v2.6-pro",
       "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
-      "collected_at": "2026-09-22",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "real-time inference, overseas USD pricing; domestic CNY list is 3/0.025/6"
     },
@@ -208,7 +168,7 @@
       "output": 0.28,
       "official_id": "mimo-v2.6-flash",
       "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
-      "collected_at": "2026-09-22",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "real-time inference, overseas USD pricing; domestic CNY list is 1/0.02/2"
     },
@@ -218,7 +178,7 @@
       "output": 0.47,
       "official_id": "qwen3.8-flash",
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
-      "collected_at": "2026-09-22",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "International; 0<Token<=1M; cache = input x 10%"
     },
@@ -228,7 +188,7 @@
       "output": 1.6,
       "official_id": "qwen3.7-plus",
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
-      "collected_at": "2026-09-22",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "International; 0<Token<=256K tier; list price, limited-time 20% off ignored per rule 4; cache = input x 10%"
     },
@@ -238,9 +198,39 @@
       "output": 6.0,
       "official_id": "grok-4.7",
       "source_url": "https://docs.x.ai/developers/models/grok-4.7",
-      "collected_at": "2026-09-22",
+      "collected_at": "2026-09-23",
       "fx_rate": null,
       "selection_note": "<=200K context tier"
+    },
+    "GPT 6 Sol": {
+      "input": 2.0,
+      "cached_input": 0.2,
+      "output": 10.0,
+      "official_id": "gpt-6-sol",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "collected_at": "2026-09-23",
+      "fx_rate": null,
+      "selection_note": "Standard tier, short context"
+    },
+    "GPT 6 Luna": {
+      "input": 0.1,
+      "cached_input": 0.01,
+      "output": 0.5,
+      "official_id": "gpt-6-luna",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "collected_at": "2026-09-23",
+      "fx_rate": null,
+      "selection_note": "Standard tier, short context"
+    },
+    "Claude Opus 5.5": {
+      "input": 4.0,
+      "cached_input": 0.2,
+      "output": 20.0,
+      "official_id": null,
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "collected_at": "2026-09-23",
+      "fx_rate": null,
+      "selection_note": "replaces Claude Opus 5"
     }
   }
 }
