@@ -84,7 +84,7 @@
       "display": "Hy4 preview",
       "official_id": "hy4-preview",
       "provider": "Tencent",
-      "pricing_url": "https://hunyuan.tencent.com/research/hy4-preview"
+      "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
     },
     {
       "display": "Deepseek V4 Pro",
@@ -114,7 +114,7 @@
       "display": "Kimi K3",
       "official_id": "kimi-k3",
       "provider": "Moonshot",
-      "pricing_url": "https://platform.kimi.ai"
+      "pricing_url": "https://platform.kimi.ai/docs/pricing"
     },
     {
       "display": "MiMo 2.6 Pro",
