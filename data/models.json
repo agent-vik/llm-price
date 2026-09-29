@@ -45,7 +45,13 @@
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
-      "display": "Claude Sonnet 5",
+      "display": "Claude Sonnet 5.5",
+      "official_id": null,
+      "provider": "Anthropic",
+      "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
+    },
+    {
+      "display": "Claude Haiku 4.5",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
