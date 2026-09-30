@@ -21,8 +21,8 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "GPT 6 Sol",
-      "official_id": "gpt-6-sol",
+      "display": "GPT 6.1 Sol",
+      "official_id": "gpt-6.1-sol",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
