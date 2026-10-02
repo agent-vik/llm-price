@@ -65,6 +65,9 @@ llm-price/
 │   ├── main.js             # 渲染逻辑（条形图 + 散点图 + 数据表）
 │   ├── og-image.png        # 社交分享图（og:image）
 │   └── gen-og.py           # OG 图生成脚本（数据从真相源读取，改数据后重跑）
+│                           #   代表模型 PICK 为「每厂商一个旗舰」：
+│                           #   Claude Fable 5.1 / GPT 6 Astra / Gemini 3.8 Flash / Deepseek V4 Pro
+│                           #   （Gemini 最强档落后其余旗舰太多，用 3.8 Flash 代表）
 ├── index.html              # 页面骨架 + SEO 元数据（meta / OG / JSON-LD）
 ├── sitemap.xml             # SEO
 ├── robots.txt              # SEO
