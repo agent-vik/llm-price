@@ -9,8 +9,14 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 models = json.load(open(f'{BASE}/data/models.json'))['models']
 prices = json.load(open(f'{BASE}/data/prices.json'))['prices']
 
-# representative spread: flagship, mid, budget, cheapest
-PICK = ['Claude 5 Fable', 'GPT 5.6 Sol', 'Grok 4.6', 'Deepseek V4 Flash']
+# representative spread: one flagship per major vendor (Claude / GPT / Gemini / DeepSeek).
+# Gemini's strongest listed tier (3.1 Pro) trails the other flagships by a wide margin,
+# so the 3.8 Flash tier stands in for it.
+PICK = ['Claude Fable 5.1', 'GPT 6 Astra', 'Gemini 3.8 Flash', 'Deepseek V4 Pro']
+
+missing = [k for k in PICK if k not in prices]
+if missing:
+    raise SystemExit(f'gen-og: unknown model key(s) in PICK: {missing}')
 
 # ---- palette (mirrors assets/style.css) ----
 BG = (13, 17, 23)
