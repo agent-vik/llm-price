@@ -53,14 +53,14 @@
       "selection_note": "off-peak pricing"
     },
     "Seed 2.1": {
-      "input": 0.9,
+      "input": 0.89,
       "cached_input": 0.18,
-      "output": 4.48,
+      "output": 4.46,
       "official_id": "doubao-seed-2.1-pro",
       "source_url": "https://www.volcengine.com/docs/82379/1544106",
       "collected_at": "2026-10-10",
-      "fx_rate": 6.6948,
-      "selection_note": "CNY 6/1.2/30 at fx 6.6948"
+      "fx_rate": 6.733,
+      "selection_note": "CNY 6/1.2/30 at fx 6.733"
     },
     "Kimi K3": {
       "input": 3.0,
@@ -123,14 +123,14 @@
       "selection_note": "off-peak pricing"
     },
     "Hy4 preview": {
-      "input": 0.9,
+      "input": 0.89,
       "cached_input": 0.04,
-      "output": 2.69,
+      "output": 2.67,
       "official_id": "hy4-preview",
       "source_url": "https://cloud.tencent.com/document/product/1823/130055",
       "collected_at": "2026-10-10",
-      "fx_rate": 6.6948,
-      "selection_note": "CNY 6/0.3/18 at fx 6.6948"
+      "fx_rate": 6.733,
+      "selection_note": "CNY 6/0.3/18 at fx 6.733"
     },
     "MiMo 2.6 Pro": {
       "input": 0.435,
