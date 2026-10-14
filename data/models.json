@@ -3,8 +3,8 @@
   "currency": "USD per 1M tokens",
   "models": [
     {
-      "display": "Gemini 3.1 Pro",
-      "official_id": "gemini-3.1-pro-preview",
+      "display": "Gemini 4 Argon",
+      "official_id": "gemini-4-argon",
       "provider": "Google",
       "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing"
     },
