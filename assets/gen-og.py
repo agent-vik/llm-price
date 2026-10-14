@@ -10,9 +10,9 @@ models = json.load(open(f'{BASE}/data/models.json'))['models']
 prices = json.load(open(f'{BASE}/data/prices.json'))['prices']
 
 # representative spread: one flagship per major vendor (Claude / GPT / Gemini / DeepSeek).
-# Gemini's strongest listed tier (3.1 Pro) trails the other flagships by a wide margin,
-# so the 3.8 Flash tier stands in for it.
-PICK = ['Claude Fable 5.1', 'GPT 6 Astra', 'Gemini 3.8 Flash', 'Deepseek V4 Pro']
+# Since Gemini 4 Argon (Google's flagship reasoning model) replaced 3.1 Pro,
+# the pick uses it directly.
+PICK = ['Claude Fable 5.1', 'GPT 6 Astra', 'Gemini 4 Argon', 'Deepseek V4 Pro']
 
 missing = [k for k in PICK if k not in prices]
 if missing:
