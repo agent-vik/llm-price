@@ -139,6 +139,12 @@
       "official_id": "MiniMax-M3",
       "provider": "MiniMax",
       "pricing_url": "https://platform.minimax.io/docs/guides/pricing-paygo"
+    },
+    {
+      "display": "Minimax M3.1 Flash",
+      "official_id": "MiniMax-M3.1-Flash",
+      "provider": "MiniMax",
+      "pricing_url": "https://platform.minimax.io/docs/guides/pricing-paygo"
     }
   ]
 }
