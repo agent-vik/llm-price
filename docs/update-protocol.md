@@ -52,6 +52,7 @@
 - 找不到官方定价页：该模型价格不写入（保留旧值或留空），在汇报中明确说明
 - 官方页无法访问（反爬/墙）：尝试官方文档的备用入口；仍失败则报告，**不用非官方数据顶替**
 - 价格单位存疑（如按 1K tokens 计价）：换算成 1M tokens 口径并在 selection_note 说明
+- **WAF 反爬拦截兜底（2026-10-19 实测）**：本沙盒 IP 被阿里云国际站 WAF 拉黑（滑块验证页，headless/有头/换代理出口均无效）时，可用 **Wayback Machine 官方页快照**（web.archive.org/cdx/search/cdx 查最近 200 快照，走代理拉取）核实价格——快照是官方页的原样存档，`source_url` 仍记官方地址，在汇报中注明快照日期。快照距当日 ≤7 天内可视为有效核验
 
 ## 6. 提交规范
 
@@ -75,7 +76,7 @@
 | MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | 服务端渲染，直接可读 |
 | DeepSeek | https://api-docs.deepseek.com/quick_start/pricing | 服务端渲染，直接可读 |
 | 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | 服务端渲染，直接可读（火山方舟模型价格） |
-| 阿里 Qwen | https://www.alibabacloud.com/help/en/model-studio/model-pricing | 国际站直接 USD 报价，无需汇率换算；cache hit = input × 10%（见 context-cache 文档） |
+| 阿里 Qwen | https://www.alibabacloud.com/help/en/model-studio/model-pricing | 国际站直接 USD 报价，无需汇率换算；cache hit = input × 10%（见 context-cache 文档）。**2026-10-19 起国际站对本沙盒 IP 弹 WAF 滑块**（页面数据改 JS 动态加载），直接抓取失效 → 走 §5 Wayback 快照兜底，或抓国内站 help.aliyun.com 同文档（CNY 口径，仅作交叉验证） |
 | 智谱 GLM | https://docs.z.ai/guides/overview/pricing | Z.AI 国际站直接 USD 报价，无需汇率换算；国内 bigmodel.cn 同价但 CNY 且需浏览器渲染 |
 | Moonshot Kimi | https://platform.kimi.ai | 国际站直接 USD 报价，无需汇率换算；国内 moonshot.cn 同价但 CNY |
 | 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | JS 渲染页面，需要浏览器环境；注意旧文档 product/1729/97731 已过期 |
