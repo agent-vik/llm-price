@@ -69,7 +69,7 @@
 
 | 厂商 | 定价页 URL | 备注 |
 |------|-----------|------|
-| Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | JS 渲染页面，普通 HTTP 请求只能拿到导航骨架，需要浏览器环境提取表格数据 |
+| Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | 2026-10-24 实测：curl 经 mihomo 代理直抓可得完整 HTML（~250KB，含全部定价数据，无需浏览器渲染），python 正则提取即可；浏览器开此页反而被墙（agent-browser 不走代理） |
 | OpenAI | https://platform.openai.com/docs/pricing | 主站有反爬拦截；备用 https://developers.openai.com/api/docs/pricing 可直接获取完整价格表 |
 | Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | 有地区封锁（重定向到 claude.com）；可通过官方博客 + 搜索交叉验证获取价格 |
 | xAI | https://docs.x.ai/developers/models/grok-4.7 | 搜索摘要即有价格信息，打开页面验证 |
@@ -78,14 +78,14 @@
 | 字节/豆包 Seed | https://www.volcengine.com/docs/82379/1544106 | 服务端渲染，直接可读（火山方舟模型价格） |
 | 阿里 Qwen | https://www.alibabacloud.com/help/en/model-studio/model-pricing | 国际站直接 USD 报价，无需汇率换算；cache hit = input × 10%（见 context-cache 文档）。**2026-10-19 起国际站对本沙盒 IP 弹 WAF 滑块**（页面数据改 JS 动态加载），直接抓取失效 → 走 §5 Wayback 快照兜底，或抓国内站 help.aliyun.com 同文档（CNY 口径，仅作交叉验证） |
 | 智谱 GLM | https://docs.z.ai/guides/overview/pricing | Z.AI 国际站直接 USD 报价，无需汇率换算；国内 bigmodel.cn 同价但 CNY 且需浏览器渲染 |
-| Moonshot Kimi | https://platform.kimi.ai | 国际站直接 USD 报价，无需汇率换算；国内 moonshot.cn 同价但 CNY |
+| Moonshot Kimi | https://platform.kimi.ai/docs/pricing/chat | 国际站直接 USD 报价，无需汇率换算；国内 moonshot.cn 同价但 CNY。**2026-10-24 起两变**：定价页迁至 /docs/pricing/chat（旧 /docs/pricing 307 重定向）；`.md` 后缀直读通道失效（表格成空壳 thead/tbody，数据改 JS 组件注入）→ 浏览器渲染后 `eval` 提取 table innerText 可靠 |
 | 腾讯 HY/混元 | https://cloud.tencent.com/document/product/1823/130055（TokenHub 价格） | JS 渲染页面，需要浏览器环境；注意旧文档 product/1729/97731 已过期 |
 | 小米 MiMo | https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go | 直接可读；同页含国内 CNY 与海外 USD 两套定价，按国际站惯例取海外 USD 价 |
 
 ### B. 采集策略（按优先级试）
 
 1. **直接请求**：优先尝试直接获取页面内容（HTTP 请求等），服务端渲染的页面可以直接拿到定价数据，成本最低
-2. **Mintlify 文档的 `.md` 后缀**：`<页面 URL>.md` 直接返回 markdown 原文，连定价表都在（含 JSX 组件里的数据行）——Kimi 平台文档靠这个解决
+2. **Mintlify 文档的 `.md` 后缀**：`<页面 URL>.md` 直接返回 markdown 原文——Kimi 平台文档曾靠此解决。**注意有例外**（2026-10-24 Kimi 实测）：表格数据改由 JS 组件注入后 .md 导出成空壳（`<tbody />`），此时升级浏览器渲染提取；另文档索引 llms.txt 可用于定位页面的真实路径
 3. **浏览器渲染**：JS 重度页面（Gemini、智谱、腾讯等）需要浏览器环境才能获取完整内容。打开页面后提取表格/文本，用完即关。每次只开一个页面
 4. **官方备用入口**：同一厂商可能有多个定价页。OpenAI 主站有反爬拦截时，`developers.openai.com/api/docs/pricing` 可直接访问且包含完整价格表
 5. **搜索辅助**：搜索结果里的 snippet 价格只能用来定位页面，写进真相源的必须是自己打开官方页看到的数字。若官方页完全无法访问，官方博客/新闻稿中的定价公告可作为降级来源，但须在 selection_note 注明
