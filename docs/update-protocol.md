@@ -70,7 +70,7 @@
 | 厂商 | 定价页 URL | 备注 |
 |------|-----------|------|
 | Google Gemini | https://ai.google.dev/gemini-api/docs/pricing | 2026-10-24 实测：curl 经 mihomo 代理直抓可得完整 HTML（~250KB，含全部定价数据，无需浏览器渲染），python 正则提取即可；浏览器开此页反而被墙（agent-browser 不走代理） |
-| OpenAI | https://platform.openai.com/docs/pricing | 主站有反爬拦截；备用 https://developers.openai.com/api/docs/pricing 可直接获取完整价格表 |
+| OpenAI | https://developers.openai.com/api/docs/pricing | 主站 platform.openai.com 反爬 403。**2026-10-27 实测 developers 子站直连也 403**（sin1 edge 拦截，UA 伪装无效）→ **经 mihomo 代理 curl 直接 200**（~580KB 完整 HTML，无需浏览器渲染）；定价数据在 astro-island 组件 props JSON（rows 数组）与渲染 `<table>` 内，python 正则可提取。渲染表格列序：Model / Input / Output / Cached input / 30m write / 12h write。新模型发布日 Wayback 快照滞后（Terra 发布次日仍无收录），此时代理直抓是唯一快路径 |
 | Anthropic | https://docs.anthropic.com/en/docs/about-claude/pricing | 有地区封锁（重定向到 claude.com）；可通过官方博客 + 搜索交叉验证获取价格 |
 | xAI | https://docs.x.ai/developers/models/grok-4.7 | 搜索摘要即有价格信息，打开页面验证 |
 | MiniMax | https://platform.minimax.io/docs/guides/pricing-paygo | 服务端渲染，直接可读 |
@@ -87,7 +87,7 @@
 1. **直接请求**：优先尝试直接获取页面内容（HTTP 请求等），服务端渲染的页面可以直接拿到定价数据，成本最低
 2. **Mintlify 文档的 `.md` 后缀**：`<页面 URL>.md` 直接返回 markdown 原文——Kimi 平台文档曾靠此解决。**注意有例外**（2026-10-24 Kimi 实测）：表格数据改由 JS 组件注入后 .md 导出成空壳（`<tbody />`），此时升级浏览器渲染提取；另文档索引 llms.txt 可用于定位页面的真实路径
 3. **浏览器渲染**：JS 重度页面（Gemini、智谱、腾讯等）需要浏览器环境才能获取完整内容。打开页面后提取表格/文本，用完即关。每次只开一个页面
-4. **官方备用入口**：同一厂商可能有多个定价页。OpenAI 主站有反爬拦截时，`developers.openai.com/api/docs/pricing` 可直接访问且包含完整价格表
+4. **官方备用入口**：同一厂商可能有多个定价页。OpenAI 主站反爬 403 时，`developers.openai.com/api/docs/pricing` 经代理可访问且包含完整价格表（直连 403，详见附录 A）
 5. **搜索辅助**：搜索结果里的 snippet 价格只能用来定位页面，写进真相源的必须是自己打开官方页看到的数字。若官方页完全无法访问，官方博客/新闻稿中的定价公告可作为降级来源，但须在 selection_note 注明
 
 ### C. 定价页常见的坑（看到这些结构别慌）
