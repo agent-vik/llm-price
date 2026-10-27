@@ -33,6 +33,12 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
+      "display": "GPT 6.1 Terra",
+      "official_id": "gpt-6.1-terra",
+      "provider": "OpenAI",
+      "pricing_url": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
       "display": "GPT 6 Luna",
       "official_id": "gpt-6-luna",
       "provider": "OpenAI",

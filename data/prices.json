@@ -62,6 +62,16 @@
       "fx_rate": null,
       "selection_note": "Standard tier, short context"
     },
+    "GPT 6.1 Terra": {
+      "input": 1.0,
+      "cached_input": 0.05,
+      "output": 5.0,
+      "official_id": "gpt-6.1-terra",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "collected_at": "2026-10-27",
+      "fx_rate": null,
+      "selection_note": "Standard tier; released 2026-10-26, added per Victor's instruction (tier revived between Sol and Luna)"
+    },
     "GPT 6 Luna": {
       "input": 0.1,
       "cached_input": 0.01,
