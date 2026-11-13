@@ -20,7 +20,7 @@
 - **价格来源**: Agent 去各官方渠道获取最新权威信息（官方文档 > 控制台定价页 > 官方博客），不用第三方聚合站
 - **更新方式**: 《价格收集与更新协议》（`docs/update-protocol.md`）由定时任务自动触发 Agent 执行，更新真相源
 - **汇率**: 每次采集用**当日最新 USD/CNY 汇率**换算 CNY 定价，并记录所用汇率
-- **元数据**: 每条价格带来源 URL / 采集日期 / 汇率 / 选取说明；**采集日期不在可视化上展示**
+- **元数据**: 每条价格在 `data/prices.json` 中记录来源 URL / 采集日期 / 汇率 / 选取说明；页面顶部徽章汇总展示全站最新 `collected YYYY-MM-DD`，图表与表格不逐条展开日期与元数据
 - **模型身份**: 存 display name（可视化用）+ official API model ID（溯源更新用）
 - **canonical 选取规则**: ① 上下文分阶梯 → 取最短档；② 有峰谷 → 取低谷价（峰谷是永久定价结构，不算促销）；③ 缓存输入价跟随主价同档同谷；④ **只记长期稳定价：判据是时效——官方永久/长期折扣采纳（取折后价），限时促销忽略（取促销前原价）**；应用规则时在 selection_note 记录依据
 - **厂商名**: 字节跳动记为 **ByteDance**
@@ -66,8 +66,7 @@ llm-price/
 │   ├── og-image.png        # 社交分享图（og:image）
 │   └── gen-og.py           # OG 图生成脚本（数据从真相源读取，改数据后重跑）
 │                           #   代表模型 PICK 为「每厂商一个旗舰」：
-│                           #   Claude Fable 5.1 / GPT 6 Astra / Gemini 3.8 Flash / Deepseek V4 Pro
-│                           #   （Gemini 最强档落后其余旗舰太多，用 3.8 Flash 代表）
+│                           #   Claude Fable 5.1 / GPT 6 Astra / Gemini 4 Carbon / Deepseek V4 Pro
 ├── index.html              # 页面骨架 + SEO 元数据（meta / OG / JSON-LD）
 ├── sitemap.xml             # SEO
 ├── robots.txt              # SEO
@@ -85,7 +84,7 @@ SEO 措施：完整 meta（description / keywords / author / robots）、Open Gr
 
 Gemini 4 Carbon / Gemini 4 Argon / Gemini 4 Hydrogen / Gemini 3.5 Flash-Lite / GPT 6 Astra / GPT 6.1 Sol / GPT 6.1 Terra / GPT 6 Luna / Claude Fable 5.1 / Claude Opus 5.5 / Claude Sonnet 5.5 / Claude Haiku 5.5 / Grok 4.7 / Seed 2.1 / Qwen 3.8 Max / Qwen 3.7 Plus / Qwen 3.8 Flash / Hy4 / Deepseek V4 Pro / Deepseek V4.1 Flash / GLM 5.3 / GLM 5.3 Flash / Kimi K3.1 Pro / MiMo 2.6 Pro / MiMo 2.6 Flash / Minimax M3 / Minimax M3.1 Flash
 
-模型增删规则：同一产品线的版本更新代替旧版本（如 Gemini 3.7 Flash → 3.8 Flash、Claude Opus 5 → Opus 5.5、HY 3.0 → Hy4）；只有全新产品线才追加（如 GPT 5.6 系列之外新增 GPT 6 Astra）。2026-10-14：Gemini 4 Argon（全新旗舰产品线）代替 Gemini 3.1 Pro（Victor 指令）。2026-10-19：新增 Minimax M3.1 Flash（$0.15/$0.015/$0.60，M3 保留）；GLM-5.3-FlashX 与 MiMo v2.6-pro-ultraspeed 官方在售但 Victor 裁决不加。2026-10-27：新增 GPT 6.1 Terra（$1/$0.05/$5，插于 Sol 与 Luna 之间，Terra 档复活，Victor 指令）。2026-11-13：新增 Gemini 4 Carbon（置于 Argon 前，不替代 Argon），Gemini 4 Hydrogen 代替 Gemini 3.8 Flash，Hy4 正式版代替 Hy4 preview（Victor 指令）。详见 `docs/update-protocol.md`。
+增删与版本替代规则见 [更新协议](docs/update-protocol.md)。当前收录约定：`Seed 2.1` 对应旗舰 `pro` 档（`doubao-seed-2.1-pro`）；官方在售但暂不收录的衍生档位有 `GLM-5.3-FlashX` 与 `MiMo-V2.6-Pro-UltraSpeed`。
 
 ---
 
