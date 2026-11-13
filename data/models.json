@@ -9,6 +9,12 @@
       "pricing_url": "https://aistudio.google.com/docs/pricing"
     },
     {
+      "display": "Gemini 4 Argon",
+      "official_id": "gemini-4-argon",
+      "provider": "Google",
+      "pricing_url": "https://aistudio.google.com/docs/pricing"
+    },
+    {
       "display": "Gemini 4 Hydrogen",
       "official_id": "gemini-4-hydrogen",
       "provider": "Google",

@@ -20,7 +20,17 @@
       "source_url": "https://aistudio.google.com/docs/pricing",
       "collected_at": "2026-11-13",
       "fx_rate": null,
-      "selection_note": "Regular price effective Dec 1, 2026; introductory $2/$10/$0.10 through Nov 30, 2026 ignored per rule 4 (time-limited promo). Implicit caching only (no explicit caching). Replaces Gemini 4 Argon per Victor's instruction."
+      "selection_note": "Regular price effective Dec 1, 2026; introductory $2/$10/$0.10 through Nov 30, 2026 ignored per rule 4 (time-limited promo). Implicit caching only (no explicit caching)."
+    },
+    "Gemini 4 Argon": {
+      "input": 4.0,
+      "cached_input": 0.2,
+      "output": 20.0,
+      "official_id": "gemini-4-argon",
+      "source_url": "https://aistudio.google.com/docs/pricing",
+      "collected_at": "2026-11-13",
+      "fx_rate": null,
+      "selection_note": "Regular price effective Dec 1, 2026; introductory $2/$10/$0.10 through Nov 30, 2026 ignored per rule 4 (time-limited promo). Implicit caching only (no explicit caching). Replaces Gemini 3.1 Pro per Victor's instruction."
     },
     "Gemini 4 Hydrogen": {
       "input": 1.5,

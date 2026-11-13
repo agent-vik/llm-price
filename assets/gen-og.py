@@ -10,8 +10,7 @@ models = json.load(open(f'{BASE}/data/models.json'))['models']
 prices = json.load(open(f'{BASE}/data/prices.json'))['prices']
 
 # representative spread: one flagship per major vendor (Claude / GPT / Gemini / DeepSeek).
-# Since Gemini 4 Carbon (Google's flagship reasoning model) replaced 4 Argon,
-# the pick uses it directly.
+# Gemini 4 Carbon is Google's flagship reasoning model.
 PICK = ['Claude Fable 5.1', 'GPT 6 Astra', 'Gemini 4 Carbon', 'Deepseek V4 Pro']
 
 missing = [k for k in PICK if k not in prices]
