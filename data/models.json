@@ -105,8 +105,8 @@
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
     {
-      "display": "Hy4 preview",
-      "official_id": "hy4-preview",
+      "display": "Hy4",
+      "official_id": "hy4",
       "provider": "Tencent",
       "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
     },

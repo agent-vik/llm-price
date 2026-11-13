@@ -182,11 +182,11 @@
       "fx_rate": null,
       "selection_note": "International scope (Singapore tab); 0<Token<=1M; cache = input x 10%"
     },
-    "Hy4 preview": {
+    "Hy4": {
       "input": 0.89,
       "cached_input": 0.04,
       "output": 2.68,
-      "official_id": "hy4-preview",
+      "official_id": "hy4",
       "source_url": "https://cloud.tencent.com/document/product/1823/130055",
       "collected_at": "2026-11-13",
       "fx_rate": 6.7152,
