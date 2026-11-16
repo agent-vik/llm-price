@@ -111,6 +111,12 @@
       "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
     },
     {
+      "display": "Hy4 Flash",
+      "official_id": "hy4-flash",
+      "provider": "Tencent",
+      "pricing_url": "https://cloud.tencent.com/document/product/1823/130055"
+    },
+    {
       "display": "Deepseek V4 Pro",
       "official_id": "deepseek-v4-pro",
       "provider": "DeepSeek",
