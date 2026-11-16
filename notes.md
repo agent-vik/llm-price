@@ -66,7 +66,7 @@ llm-price/
 │   ├── og-image.png        # 社交分享图（og:image）
 │   └── gen-og.py           # OG 图生成脚本（数据从真相源读取，改数据后重跑）
 │                           #   代表模型 PICK 为「每厂商一个旗舰」：
-│                           #   Claude Fable 5.1 / GPT 6 Astra / Gemini 4 Carbon / Deepseek V4 Pro
+│                           #   Claude Fable 5.2 / GPT 6 Astra / Gemini 4 Carbon / Deepseek V4 Pro
 ├── index.html              # 页面骨架 + SEO 元数据（meta / OG / JSON-LD）
 ├── sitemap.xml             # SEO
 ├── robots.txt              # SEO
@@ -82,9 +82,9 @@ SEO 措施：完整 meta（description / keywords / author / robots）、Open Gr
 
 ## 6. 模型清单（顺序固定，增删由 Victor 定）
 
-Gemini 4 Carbon / Gemini 4 Argon / Gemini 4 Hydrogen / Gemini 3.5 Flash-Lite / GPT 6 Astra / GPT 6.1 Sol / GPT 6.1 Terra / GPT 6 Luna / Claude Fable 5.1 / Claude Opus 5.5 / Claude Sonnet 5.5 / Claude Haiku 5.5 / Grok 4.7 / Seed 2.1 / Qwen 3.8 Max / Qwen 3.7 Plus / Qwen 3.8 Flash / Hy4 / Hy4 Flash / Deepseek V4 Pro / Deepseek V4.1 Flash / GLM 5.3 / GLM 5.3 Flash / Kimi K3.1 Pro / MiMo 2.6 Pro / MiMo 2.6 Flash / Minimax M3 / Minimax M3.1 Flash
+Gemini 4 Carbon / Gemini 4 Argon / Gemini 4 Hydrogen / Gemini 3.5 Flash-Lite / GPT 6 Astra / GPT 6.1 Sol / GPT 6.1 Terra / GPT 6 Luna / Claude Fable 5.2 / Claude Opus 5.5 / Claude Sonnet 5.5 / Claude Haiku 5.5 / Grok 4.7 / Seed 2.1 / Qwen 4 Max / Qwen 3.7 Plus / Qwen 3.8 Flash / Hy4 / Hy4 Flash / Deepseek V4 Pro / Deepseek V4.1 Flash / GLM 5.3 / GLM 5.3 Flash / Kimi K3.1 Pro / MiMo 2.6 Pro / MiMo 2.6 Flash / Minimax M3 / Minimax M3.1 Flash
 
-增删与版本替代规则见 [更新协议](docs/update-protocol.md)。当前收录约定：`Seed 2.1` 对应旗舰 `pro` 档（`doubao-seed-2.1-pro`）；官方在售但暂不收录的衍生档位有 `GLM-5.3-FlashX` 与 `MiMo-V2.6-Pro-UltraSpeed`。2026-11-16：新增 `Hy4 Flash`（置于 `Hy4` 后，Victor 指令）。
+增删与版本替代规则见 [更新协议](docs/update-protocol.md)。当前收录约定：`Seed 2.1` 对应旗舰 `pro` 档（`doubao-seed-2.1-pro`）；官方在售但暂不收录的衍生档位有 `GLM-5.3-FlashX` 与 `MiMo-V2.6-Pro-UltraSpeed`。2026-11-16：新增 `Hy4 Flash`（置于 `Hy4` 后，Victor 指令）；同日 `Claude Fable 5.2` 代替 `Claude Fable 5.1`（$8/$0.20/$40），`Qwen 4 Max` 代替 `Qwen 3.8 Max`（$1.5/$0.075/$4.5，Victor 确认）。
 
 ---
 

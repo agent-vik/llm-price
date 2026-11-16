@@ -51,7 +51,7 @@
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "Claude Fable 5.1",
+      "display": "Claude Fable 5.2",
       "official_id": null,
       "provider": "Anthropic",
       "pricing_url": "https://platform.claude.com/docs/en/about-claude/pricing"
@@ -87,8 +87,8 @@
       "pricing_url": "https://www.volcengine.com/docs/82379/1544106"
     },
     {
-      "display": "Qwen 3.8 Max",
-      "official_id": "qwen3.8-max",
+      "display": "Qwen 4 Max",
+      "official_id": "qwen4-max",
       "provider": "Alibaba",
       "pricing_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
     },
