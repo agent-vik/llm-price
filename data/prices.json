@@ -52,25 +52,25 @@
       "fx_rate": null,
       "selection_note": null
     },
-    "GPT 6 Astra": {
-      "input": 10.0,
-      "cached_input": 1.0,
-      "output": 50.0,
-      "official_id": "gpt-6-astra",
+    "GPT 6.2 Astra": {
+      "input": 8.0,
+      "cached_input": 0.4,
+      "output": 40.0,
+      "official_id": "gpt-6.2-astra",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "collected_at": "2026-11-19",
       "fx_rate": null,
-      "selection_note": "Standard processing; short context (<=272K); Long-context tier available"
+      "selection_note": "Standard tier, short context (<=272K); Long-context tier available; replaces GPT 6 Astra per Victor's instruction"
     },
-    "GPT 6.1 Sol": {
+    "GPT 6.2 Sol": {
       "input": 2.0,
       "cached_input": 0.1,
       "output": 10.0,
-      "official_id": "gpt-6.1-sol",
+      "official_id": "gpt-6.2-sol",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "collected_at": "2026-11-19",
       "fx_rate": null,
-      "selection_note": "Standard tier, short context"
+      "selection_note": "Standard tier, short context; Long-context tier available; replaces GPT 6.1 Sol per Victor's instruction"
     },
     "GPT 6.1 Terra": {
       "input": 1.0,

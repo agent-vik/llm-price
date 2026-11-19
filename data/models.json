@@ -27,14 +27,14 @@
       "pricing_url": "https://aistudio.google.com/docs/pricing"
     },
     {
-      "display": "GPT 6 Astra",
-      "official_id": "gpt-6-astra",
+      "display": "GPT 6.2 Astra",
+      "official_id": "gpt-6.2-astra",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
     {
-      "display": "GPT 6.1 Sol",
-      "official_id": "gpt-6.1-sol",
+      "display": "GPT 6.2 Sol",
+      "official_id": "gpt-6.2-sol",
       "provider": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing"
     },
