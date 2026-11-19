@@ -253,29 +253,36 @@
     yl.textContent = 'Output price (USD / 1M tokens, log)';
     svg.appendChild(yl);
 
-    // dots + labels — greedy placement; right of the dot is preferred,
-    // other positions are fallbacks when there is no room
-    var placed = [];
-    var CANDIDATES = [
-      { dx: 11, dy: 4, anchor: 'start' },    // right of the dot (preferred)
-      { dx: 10, dy: -8, anchor: 'start' },   // upper right
-      { dx: 10, dy: 14, anchor: 'start' },   // lower right
-      { dx: -11, dy: 4, anchor: 'end' },     // left of the dot
-      { dx: -10, dy: -8, anchor: 'end' },    // upper left
-      { dx: -10, dy: 14, anchor: 'end' },    // lower left
-      { dx: 0, dy: -11 },                    // above
-      { dx: 0, dy: 18 }                      // below
-    ];
-    function fitsPlot(cand, x, est) {
-      var lx = x + cand.dx;
-      if (cand.anchor === 'start' && lx + est > SC.w - SC.mr) return false;
-      if (cand.anchor === 'end' && lx - est < SC.ml) return false;
-      return true;
-    }
+    // layer order: leaders underneath dots, labels on top
+    var leadersG = svgEl('g', { class: 'sc-leaders' });
+    var dotsG = svgEl('g', { class: 'sc-dots' });
+    var labelsG = svgEl('g', { class: 'sc-labels' });
+    svg.appendChild(leadersG);
+    svg.appendChild(dotsG);
+    svg.appendChild(labelsG);
+
+    var items = [];
+    var tails = [];
+    var rawPts = [];
+    var coordGroups = {};
     models.forEach(function (m) {
       var p = prices[m.display];
       if (!p) return;
-      var x = sx(p.input), y = sy(p.output);
+      var rx = sx(p.input), ry = sy(p.output);
+      var key = rx.toFixed(1) + ',' + ry.toFixed(1);
+      if (!coordGroups[key]) coordGroups[key] = [];
+      var entry = { m: m, p: p, rx: rx, ry: ry, key: key, idxInGroup: coordGroups[key].length };
+      coordGroups[key].push(entry);
+      rawPts.push(entry);
+    });
+
+    rawPts.forEach(function (entry) {
+      var m = entry.m, p = entry.p;
+      var groupLen = coordGroups[entry.key].length;
+      var shift = groupLen > 1 ? (entry.idxInGroup - (groupLen - 1) / 2) : 0;
+      // micro-dodge co-located points so neither dot nor overlapping cache tail is buried
+      var x = entry.rx + shift * 3.2;
+      var y = entry.ry + shift * 2.4;
       var color = VENDOR_COLORS[m.provider] || '#c0c8d8';
 
       // tail: cached price (solid tick) .. input price (faded span) —
@@ -283,12 +290,13 @@
       // "input faded / cached solid" color language
       if (p.cached_input != null) {
         var xc = sx(p.cached_input);
-        svg.appendChild(svgEl('line', {
+        tails.push({ x1: Math.min(xc, x), x2: Math.max(xc, x), y: y });
+        dotsG.appendChild(svgEl('line', {
           x1: xc, y1: y, x2: x, y2: y,
-          stroke: color, 'stroke-opacity': 0.35, 'stroke-width': 3
+          stroke: color, 'stroke-opacity': 0.38, 'stroke-width': 3
         }));
-        svg.appendChild(svgEl('line', {
-          x1: xc, y1: y - 5, x2: xc, y2: y + 5,
+        dotsG.appendChild(svgEl('line', {
+          x1: xc, y1: y - 4.5, x2: xc, y2: y + 4.5,
           stroke: color, 'stroke-width': 2
         }));
       }
@@ -298,35 +306,246 @@
         m.display + ' \u2014 input $' + fmt(p.input) +
         (p.cached_input != null ? ', cached $' + fmt(p.cached_input) : '') +
         ', output $' + fmt(p.output);
-      svg.appendChild(dot);
+      dotsG.appendChild(dot);
 
-      // pick the first candidate that fits the plot and doesn't collide
-      var est = m.display.length * 5.2; // rough label width in px
-      var chosen = CANDIDATES[CANDIDATES.length - 1];
-      for (var c = 0; c < CANDIDATES.length; c++) {
-        var cand = CANDIDATES[c];
-        if (!fitsPlot(cand, x, est)) continue;
-        var lx = x + cand.dx, ly = y + cand.dy;
-        var centerX = cand.anchor === 'start' ? lx + est / 2
-                    : cand.anchor === 'end' ? lx - est / 2 : lx;
-        var hit = false;
-        for (var q = 0; q < placed.length; q++) {
-          if (Math.abs(placed[q].x - centerX) < (est + placed[q].w) / 2 && Math.abs(placed[q].y - ly) < 13) {
-            hit = true; break;
+      var textEl = svgEl('text', { class: 'sc-label', x: 0, y: 0, 'text-anchor': 'middle' });
+      textEl.textContent = m.display;
+      labelsG.appendChild(textEl);
+
+      var bb = textEl.getBBox();
+      var w = (bb && bb.width > 0) ? bb.width : m.display.length * 5.6;
+      var h = (bb && bb.height > 0) ? bb.height : 12;
+      var baselineOffset = (bb && bb.height > 0) ? -(bb.y + bb.height / 2) : 3.3;
+
+      items.push({
+        display: m.display,
+        color: color,
+        dx: x,
+        dy: y,
+        w: w,
+        h: h,
+        hw: w / 2 + 3,
+        hh: h / 2 + 2.5,
+        baselineOffset: baselineOffset,
+        textEl: textEl,
+        cx: x,
+        cy: y,
+        groupLen: groupLen,
+        idxInGroup: entry.idxInGroup,
+        shift: shift
+      });
+    });
+
+    // force-directed label repulsion (ggrepel-style):
+    // keeps isolated labels snug to the right of their dot,
+    // pushes crowded clusters into clear space, and draws thin leader lines
+    var plotL = SC.ml + 4, plotR = SC.w - SC.mr - 4;
+    var plotT = SC.mt + 4, plotB = SC.h - SC.mb - 4;
+
+    function clampBox(it) {
+      if (it.cx - it.hw < plotL) it.cx = plotL + it.hw;
+      if (it.cx + it.hw > plotR) it.cx = plotR - it.hw;
+      if (it.cy - it.hh < plotT) it.cy = plotT + it.hh;
+      if (it.cy + it.hh > plotB) it.cy = plotB - it.hh;
+    }
+
+    // preferred home: to the right of dot (avoids left-extending cache tail),
+    // falling back to left if near the right border; align stagger with dot shift so leaders never cross
+    items.forEach(function (it) {
+      var rightHomeX = it.dx + it.hw + 8.5;
+      if (rightHomeX + it.hw <= plotR) {
+        it.homeX = rightHomeX;
+        it.homeY = it.dy + it.shift * 14;
+      } else {
+        it.homeX = it.dx - it.hw - 8.5;
+        it.homeY = it.dy + it.shift * 14;
+      }
+      it.cx = it.homeX;
+      it.cy = it.homeY;
+      clampBox(it);
+    });
+
+    var ITERS = 260;
+    for (var step = 0; step < ITERS; step++) {
+      var alpha = 1 - step / ITERS;
+      var forces = items.map(function () { return { fx: 0, fy: 0 }; });
+
+      // 1. label-label repulsion
+      for (var i = 0; i < items.length; i++) {
+        for (var j = i + 1; j < items.length; j++) {
+          var a = items[i], b = items[j];
+          var dx = a.cx - b.cx, dy = a.cy - b.cy;
+          var ox = (a.hw + b.hw) - Math.abs(dx);
+          var oy = (a.hh + b.hh) - Math.abs(dy);
+          if (ox > 0 && oy > 0) {
+            if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) dy = (i % 2 === 0 ? -1 : 1);
+            // push primarily along the axis of shallower normalized penetration
+            if (oy / (a.hh + b.hh) <= ox / (a.hw + b.hw)) {
+              var sgnY = dy >= 0 ? 1 : -1;
+              var pushY = oy * 0.55 + 0.6;
+              forces[i].fy += sgnY * pushY;
+              forces[j].fy -= sgnY * pushY;
+              // horizontal nudge to help vertically sandwiched clusters fan out cleanly
+              var sgnX = dx >= 0 ? 1 : -1;
+              forces[i].fx += sgnX * 0.55;
+              forces[j].fx -= sgnX * 0.55;
+            } else {
+              var sgnX2 = dx >= 0 ? 1 : -1;
+              var pushX = ox * 0.55 + 0.6;
+              forces[i].fx += sgnX2 * pushX;
+              forces[j].fx -= sgnX2 * pushX;
+            }
           }
         }
-        if (!hit) { chosen = cand; break; }
       }
-      var label = svgEl('text', {
-        class: 'sc-label', x: x + chosen.dx, y: y + chosen.dy,
-        'text-anchor': chosen.anchor || 'middle'
-      });
-      label.textContent = m.display;
-      svg.appendChild(label);
-      var placedCX = chosen.anchor === 'start' ? x + chosen.dx + est / 2
-                  : chosen.anchor === 'end' ? x + chosen.dx - est / 2
-                  : x + chosen.dx;
-      placed.push({ x: placedCX, y: y + chosen.dy, w: est });
+
+      // 2. label-dot repulsion (against ALL dots)
+      var DOT_PAD = 8;
+      for (var i2 = 0; i2 < items.length; i2++) {
+        var lab = items[i2];
+        for (var k = 0; k < items.length; k++) {
+          var dotPt = items[k];
+          var ddx = lab.cx - dotPt.dx, ddy = lab.cy - dotPt.dy;
+          var dox = (lab.hw + DOT_PAD) - Math.abs(ddx);
+          var doy = (lab.hh + DOT_PAD) - Math.abs(ddy);
+          if (dox > 0 && doy > 0) {
+            if (doy / (lab.hh + DOT_PAD) <= dox / (lab.hw + DOT_PAD)) {
+              forces[i2].fy += (ddy >= 0 ? 1 : -1) * (doy * 0.65 + 0.5);
+              forces[i2].fx += (ddx >= 0 ? 1 : -1) * 0.35;
+            } else {
+              forces[i2].fx += (ddx >= 0 ? 1 : -1) * (dox * 0.65 + 0.5);
+              // gentle vertical bias so wide labels wedged between two dots don't stall
+              forces[i2].fy += (Math.abs(ddy) > 0.5 ? (ddy >= 0 ? 1 : -1) : (i2 % 2 === 0 ? 1 : -1)) * 0.6;
+            }
+          }
+        }
+      }
+
+      // 3. soft repulsion away from cache tail lines
+      for (var i3 = 0; i3 < items.length; i3++) {
+        var lb = items[i3];
+        for (var t = 0; t < tails.length; t++) {
+          var tl = tails[t];
+          if (lb.cx + lb.hw > tl.x1 && lb.cx - lb.hw < tl.x2) {
+            var tdy = lb.cy - tl.y;
+            var toy = (lb.hh + 2.5) - Math.abs(tdy);
+            if (toy > 0) {
+              forces[i3].fy += (tdy >= 0 ? 1 : -1) * toy * 0.32 * alpha;
+            }
+          }
+        }
+      }
+
+      // 4. gentle spring back toward home (stronger while cooling, weak on overlap)
+      for (var i4 = 0; i4 < items.length; i4++) {
+        var itm = items[i4];
+        var f = forces[i4];
+        if (Math.abs(f.fx) < 0.1 && Math.abs(f.fy) < 0.1) {
+          f.fx += (itm.homeX - itm.cx) * 0.08;
+          f.fy += (itm.homeY - itm.cy) * 0.08;
+        } else {
+          f.fx += (itm.homeX - itm.cx) * 0.02 * alpha;
+          f.fy += (itm.homeY - itm.cy) * 0.02 * alpha;
+        }
+        // step clamp for stability
+        var maxStep = 6 * (0.35 + 0.65 * alpha);
+        itm.cx += Math.max(-maxStep, Math.min(maxStep, f.fx));
+        itm.cy += Math.max(-maxStep, Math.min(maxStep, f.fy));
+        clampBox(itm);
+      }
+    }
+
+    function countConflicts(idx, cx, cy) {
+      var hits = 0;
+      for (var m = 0; m < items.length; m++) {
+        var o = items[m];
+        if (Math.abs(cx - o.dx) < items[idx].hw + 7.5 && Math.abs(cy - o.dy) < items[idx].hh + 7.5) hits++;
+        if (m !== idx && Math.abs(cx - o.cx) < items[idx].hw + o.hw && Math.abs(cy - o.cy) < items[idx].hh + o.hh) hits++;
+      }
+      return hits;
+    }
+
+    // final strict projection pass (labels & dots) to guarantee 0 overlap
+    for (var pass = 0; pass < 140; pass++) {
+      var moved = false;
+      for (var pi = 0; pi < items.length; pi++) {
+        for (var pj = pi + 1; pj < items.length; pj++) {
+          var pa = items[pi], pb = items[pj];
+          var pdx = pa.cx - pb.cx, pdy = pa.cy - pb.cy;
+          var pox = (pa.hw + pb.hw) - Math.abs(pdx);
+          var poy = (pa.hh + pb.hh) - Math.abs(pdy);
+          if (pox > 0 && poy > 0) {
+            moved = true;
+            if (pass < 30 && poy / (pa.hh + pb.hh) <= pox / (pa.hw + pb.hw)) {
+              var py = (pdy >= 0 ? 1 : -1) * (poy / 2 + 0.5);
+              pa.cy += py; pb.cy -= py;
+              var nudgeX = (pdx >= 0 ? 1 : -1) * 1.5;
+              pa.cx += nudgeX; pb.cx -= nudgeX;
+            } else {
+              var px = (pdx >= 0 ? 1 : -1) * (pox / 2 + 0.5);
+              pa.cx += px; pb.cx -= px;
+            }
+            clampBox(pa); clampBox(pb);
+          }
+        }
+        var pl = items[pi];
+        for (var pk = 0; pk < items.length; pk++) {
+          var pd = items[pk];
+          var ddx2 = pl.cx - pd.dx, ddy2 = pl.cy - pd.dy;
+          var dox2 = (pl.hw + 7.5) - Math.abs(ddx2);
+          var doy2 = (pl.hh + 7.5) - Math.abs(ddy2);
+          if (dox2 > 0 && doy2 > 0) {
+            moved = true;
+            if (pass < 25) {
+              if (doy2 <= dox2) pl.cy += (ddy2 >= 0 ? 1 : -1) * (doy2 + 0.5);
+              else pl.cx += (ddx2 >= 0 ? 1 : -1) * (dox2 + 0.5);
+              clampBox(pl);
+            } else {
+              // test 4 clear sides around the blocking dot and pick zero/min-conflict position nearest home
+              var cands = [
+                [pl.cx, pd.dy - pl.hh - 8],
+                [pl.cx, pd.dy + pl.hh + 8],
+                [pd.dx - pl.hw - 8, pl.cy],
+                [pd.dx + pl.hw + 8, pl.cy]
+              ];
+              var bestScore = Infinity, bestX = pl.cx, bestY = pl.cy;
+              for (var ci = 0; ci < cands.length; ci++) {
+                var tx = Math.max(plotL + pl.hw, Math.min(plotR - pl.hw, cands[ci][0]));
+                var ty = Math.max(plotT + pl.hh, Math.min(plotB - pl.hh, cands[ci][1]));
+                var sc = countConflicts(pi, tx, ty) * 1e6 + Math.hypot(tx - pl.homeX, ty - pl.homeY);
+                if (sc < bestScore) { bestScore = sc; bestX = tx; bestY = ty; }
+              }
+              pl.cx = bestX; pl.cy = bestY;
+            }
+          }
+        }
+      }
+      if (!moved) break;
+    }
+
+    // position SVG text elements and draw thin leader lines when displaced
+    items.forEach(function (it) {
+      it.textEl.setAttribute('x', it.cx.toFixed(1));
+      it.textEl.setAttribute('y', (it.cy + it.baselineOffset).toFixed(1));
+
+      // nearest point on tight label box to the dot center
+      var boxL = it.cx - it.w / 2 - 2, boxR = it.cx + it.w / 2 + 2;
+      var boxT = it.cy - it.h / 2 - 1, boxB = it.cy + it.h / 2 + 1;
+      var nx = Math.max(boxL, Math.min(boxR, it.dx));
+      var ny = Math.max(boxT, Math.min(boxB, it.dy));
+      var vx = nx - it.dx, vy = ny - it.dy;
+      var dist = Math.hypot(vx, vy);
+      if (dist > 14) {
+        var ux = vx / dist, uy = vy / dist;
+        leadersG.appendChild(svgEl('line', {
+          class: 'sc-leader',
+          x1: (it.dx + ux * 6.5).toFixed(1),
+          y1: (it.dy + uy * 6.5).toFixed(1),
+          x2: nx.toFixed(1),
+          y2: ny.toFixed(1),
+          stroke: it.color
+        }));
+      }
     });
   }
 

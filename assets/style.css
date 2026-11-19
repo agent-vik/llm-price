@@ -181,7 +181,15 @@ main, .site-header, .site-footer {
 .sc-tick { fill: var(--text-faint); font-size: 11px; }
 .sc-axis-label { fill: var(--text-dim); font-size: 12px; }
 .sc-dot { stroke: rgba(255, 255, 255, 0.25); stroke-width: 1; cursor: default; }
-.sc-label { fill: var(--text-dim); font-size: 9.5px; }
+.sc-leader { fill: none; stroke-width: 1; stroke-opacity: 0.55; pointer-events: none; }
+.sc-label {
+  fill: var(--text-dim);
+  font-size: 9.5px;
+  paint-order: stroke;
+  stroke: var(--bg-panel);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
 
 .vendor-legend {
   display: flex;
