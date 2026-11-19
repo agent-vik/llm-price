@@ -185,6 +185,7 @@ main, .site-header, .site-footer {
 .sc-label {
   fill: var(--text-dim);
   font-size: 9.5px;
+  /* panel-colored halo breaks crossing grid, tail, and leader lines behind text */
   paint-order: stroke;
   stroke: var(--bg-panel);
   stroke-width: 3.5px;

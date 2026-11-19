@@ -46,7 +46,7 @@ Victor 管理的模型列表（display / official_id / provider / pricing_url）
 页面结构自上而下：
 
 1. **双向（蝴蝶）条形图**：模型名居中列，输入价条形向左、输出价条形向右，两侧各自对数刻度（坐标域按数据自动取整到十的幂）；缓存价不是独立条，作为实心段嵌在输入条内（同色、输入部分降低透明度）；条形旁数值标注，缓存价以括号跟在输入价后；按厂商分组显示；顶部有对数刻度警示条（防止观众按线性读图）
-2. **Price Space 散点图**：双对数坐标，坐标域数据驱动自适应；每点一个模型、按厂商着色；同坐标模型做微错位（micro-dodge），防止圆点与缓存拖尾重叠掩盖；拖尾线编码缓存折扣（尾巴从缓存价延伸到输入价，越长折扣越深，颜色语言与蝴蝶图一致）；虚线参考线 output=input；标签采用力导向排斥算法（含同色引导线与严格零重叠投影）+ 深色文字描边晕（halo）直接全量避让展示，兼顾无悬停直接截图传播
+2. **Price Space 散点图**：双对数坐标，坐标域数据驱动自适应；每点一个模型、按厂商着色；同坐标点做微错位（micro-dodge），防止圆点与缓存拖尾互相掩盖；拖尾线编码缓存折扣（从缓存价延伸到输入价，越长折扣越深，颜色语言与蝴蝶图一致）；虚线参考线 output=input；桌面端标签直接渲染避让（基于真实文本包围盒做力导向排斥、严格零重叠投影与四向死锁脱困，辅以同厂商色细引导线及面板底色文字描边晕），移动端隐藏标签
 3. **完整数据表**：三维价格 + 官方来源链接
 4. **Methodology**：读图说明、正价规则、汇率换算口径、更新机制
 
@@ -84,7 +84,7 @@ SEO 措施：完整 meta（description / keywords / author / robots）、Open Gr
 
 Gemini 4 Carbon / Gemini 4 Neon / Gemini 4 Hydrogen / Gemini 3.5 Flash-Lite / GPT 6.2 Astra / GPT 6.2 Sol / GPT 6.1 Terra / GPT 6 Luna / Claude Fable 5.2 / Claude Opus 5.5 / Claude Sonnet 5.5 / Claude Haiku 5.5 / Grok 4.7 / Seed 2.1 / Qwen 4 Max / Qwen 3.7 Plus / Qwen 3.8 Flash / Hy4 / Hy4 Flash / Deepseek V4 Pro / Deepseek V4.1 Flash / GLM 5.3 / GLM 5.3 Flash / Kimi K3.1 Pro / MiMo 2.6 Pro / MiMo 2.6 Flash / Minimax M3 / Minimax M3.1 Flash
 
-增删与版本替代规则见 [更新协议](docs/update-protocol.md)。当前收录约定：`Seed 2.1` 对应旗舰 `pro` 档（`doubao-seed-2.1-pro`）；官方在售但暂不收录的衍生档位有 `GLM-5.3-FlashX` 与 `MiMo-V2.6-Pro-UltraSpeed`。2026-11-16：新增 `Hy4 Flash`（置于 `Hy4` 后，Victor 指令）；同日 `Claude Fable 5.2` 代替 `Claude Fable 5.1`（$8/$0.20/$40），`Qwen 4 Max` 代替 `Qwen 3.8 Max`（$1.5/$0.075/$4.5，Victor 确认）。2026-11-19：`Gemini 4 Neon` 代替 `Gemini 4 Argon`（$3/$0.15/$15，Victor 指令）；`GPT 6.2 Astra` 代替 `GPT 6 Astra`（$8/$0.40/$40），`GPT 6.2 Sol` 代替 `GPT 6.1 Sol`（$2/$0.10/$10，Victor 确认）。
+增删与版本替代规则见 [更新协议](docs/update-protocol.md)。当前收录约定：`Seed 2.1` 对应旗舰 `pro` 档（`doubao-seed-2.1-pro`）；官方在售但暂不收录的衍生档位有 `GLM-5.3-FlashX` 与 `MiMo-V2.6-Pro-UltraSpeed`。
 
 ---
 

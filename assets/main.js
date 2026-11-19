@@ -535,6 +535,7 @@
       var ny = Math.max(boxT, Math.min(boxB, it.dy));
       var vx = nx - it.dx, vy = ny - it.dy;
       var dist = Math.hypot(vx, vy);
+      // suppress short stub leaders when a label sits near its home position
       if (dist > 14) {
         var ux = vx / dist, uy = vy / dist;
         leadersG.appendChild(svgEl('line', {
